@@ -2,8 +2,8 @@
 
 ### **Contents**
 * Week_2
- * Data - weightdata
- * Scripts
+  * Data - weightdata
+  * Scripts
 * Week_3
 
 ### **About me**
