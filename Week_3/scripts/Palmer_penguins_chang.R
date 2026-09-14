@@ -12,6 +12,8 @@ library (palmerpenguins)
 library(tidyverse)
 library(here)
 library(devtools)
+library(beyonce)
+library(ggthemes)
 
 # looking at the data
 glimpse(penguins)
@@ -23,24 +25,37 @@ ggplot(data=penguins,
                      y=bill_length_mm,
                      group=species,
                      color=species)) +
-geom_point()+
+geom_point(size=2)+
   geom_smooth(method= "lm")+
-  labs(x="Bill depth (mm)",
-       y="Bill length (mm)")
- # color=species,
- # shape=island
- # facet_wrap(~species, ncol=2)+
- # guides(color="none",shape="none")#make it 2 columns
-#faceted by species^^
-  #facet_grid(species~sex)
-# faceting is making smaller graphs. Above translates to: species faceted by sex
+  labs(title= "Bill Depth and Length of Adelie, Chinstrap, and Gentoo Penguins",
+    x="Bill depth (mm)",
+       y="Bill length (mm)",
+       color="Species")+
+scale_color_manual(values = beyonce_palette(23))+
+  theme_bw()+
+  theme(axis.title = element_text(size = 10),
+        (plot.title=element_text(size=20)))
+
+ggsave(here("Week_3","Outputs","penguin.png"))
+
+       
+#panel.background = element_rect(fill = "linen"))
+#theme_classic()
+# coord_fixed() # fix axes
+# coord_polar("x") # make the polar 
+# coord_flip() # flip x and y axes
+# color=species,
+# shape=island
+# facet_wrap(~species, ncol=2)+ #faceted by species
+  # guides(color="none",shape="none")#make it 2 columns
+  #facet_grid(species~sex) # faceting is making smaller graphs,species faceted by sex
   #labs(title = "Bill Depth and Bill Length",
      #  subtitle="Dimensions for Adelie, Chinstrap, and Gentoo",
     #   x="Bill Depth (mm)", y="Bill Length (mm)",
      #  color="Species",
     #   shape="Islands",
     #   caption="Source: Palmer Station LTER")
-scale_colour_viridis_d()
+
 
 
 
