@@ -1,0 +1,47 @@
+---
+title: "First Quarto Doc"
+author: "Jasmine Chang"
+format: html
+editor: visual
+---
+
+### My document (notes)
+
+```{r}
+#| warning: false    # suppress warnings in all chunks
+#| message: false   # suppress package loading messages
+#| echo: false      # hide code by default (show results only)
+#| eval: true       # run all chunks (the default)
+1+1
+```
+
+# In your prose (not a code chunk), write:
+
+# backtick + r + space + expression + backtick
+
+# Examples:
+
+# The dataset has `nrow(penguins)` rows.
+
+# The mean is `round(mean(x, na.rm = TRUE), 1)`.
+
+# Analysis run on `Sys.Date()`.
+
+### Activity: Inline R code
+
+```{r}
+## load libraries ##
+library(palmerpenguins)
+library(here)
+library(tidyverse)
+library(rsconnect)
+## load data ##
+glimpse(penguins)
+## publish code ##
+rsconnect::deployDoc(
+  doc      = here("Week_6","scripts", "my_analysis.qmd"),  # path to your .qmd
+  appTitle = "OCN 682 - Your Name - Week 6"        # give it a clear title
+)
+```
+
+There are **3** total species of penguins. The maximum bill length is `r max(penguins$bill_length_mm, na.rm=TRUE)` and the minimum bill length is `r min(penguins$bill_lengh_mm, na.rm=TRUE)`. The mean bill length is `round(mean(penguins$bill_length_mm, na.rm=TRUE),1)`.
