@@ -31,8 +31,6 @@ Data collected on each penguin included:
 
 I hope to investigate the changes of flipper length and body length over time when looking at the three islands.
 
-
-
 ## Running Code
 
 When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
@@ -71,3 +69,11 @@ You can add options to executable code like this
 ```
 
 The `echo: false` option disables the printing of code (only output is displayed).
+
+# When youʻre done
+
+upload to cloud connect
+* click publish
+* post to connect cloud
+* document only
+* put the link from the document into READ.ME
