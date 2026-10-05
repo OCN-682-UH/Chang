@@ -1,0 +1,67 @@
+---
+title: "CW_quarto_2"
+author: "Jasmine Chang"
+format: html
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+## load libraries ##
+library(tidyverse)
+library(here)
+library(ggplot2)
+library(palmerpenguins)
+library(dplyr)
+
+## load data ##
+glimpse(penguins)
+
+## clean data ##
+palmer_clean <- penguins |>
+  select(species,sex,year,bill_length_mm,body_mass_g)
+glimpse(palmer_clean)
+
+
+
+## ggplot ##
+#|out-width:70% # changes the size of your figure
+ggplot(data=palmer_clean,mapping = aes(x=species, y=bill_length_mm))+
+  geom_boxplot()
+
+```
+
+```{r}
+## ggplot ##
+#|fig-width: 3 # inputs exact size (inches) of figure
+#|fig-width: 5
+ggplot(data=palmer_clean,mapping = aes(x=species, y=bill_length_mm))+
+  geom_boxplot()
+
+
+```
+
+```{r}
+
+## ggplot ##
+#| fig-align:"center" # puts figure in the center of the rendering
+ggplot(data=palmer_clean,mapping = aes(x=species, y=bill_length_mm))+
+  geom_boxplot()
+
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).

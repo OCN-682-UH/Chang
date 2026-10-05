@@ -20,7 +20,7 @@ Data was taken of three species of Palmer Penguins in attempt to better understa
 
 ## Data Collection
 
-Scientists took data on three species: *Adelie*, *Gentoo*, and *Chinstrap*, on the islands of the islands of Torgersen, Biscoe, and Dream from 2007 to 2009.
+Scientists took data on three species: Adelie(*Pygoscelis adeliae*), Gentoo(*Pygoscelis papua*), and Chinstrap (*Pygoscelis antarctica*) on the islands of the islands of Torgersen, Biscoe, and Dream from the year 2007 to 2009.
 
 Data collected on each penguin included:
 
@@ -28,6 +28,10 @@ Data collected on each penguin included:
 - Bill Length (mm)
 - Flipper Length (mm)
 - Body Mass (g)
+
+I hope to investigate the changes of flipper length and body length over time when looking at the three islands.
+
+
 
 ## Running Code
 
@@ -39,12 +43,22 @@ library(tidyverse)
 library(here)
 library(ggplot2)
 library(palmerpenguins)
+library(dplyr)
 
 ## load data ##
 glimpse(penguins)
 
 ## clean data ##
-palmer_clean <- filter()
+palmer_clean <- penguins |>
+  select(species,sex,year,bill_length_mm,body_mass_g)
+glimpse(palmer_clean)
+
+
+
+## ggplot ##
+
+ggplot(data=palmer_clean,mapping = aes(x=year, y=bill_length_mm))+
+  geom_line()
 
 
 ```
