@@ -6,24 +6,47 @@ editor: visual
 
 Homework Instructions:
 
-*Take any of the data sheets you have already worked with in class and create at least one table and one figure in an Quarto file. 
+- Take any of the data sheets you have already worked with in class and create at least one table and one figure in an Quarto file.
+- Create the most beautiful Quarto output you can in either an html, github doc, or pdf format. YOU MUST RENDER THE FILE
+- Make sure you have headings with clear explanations of what you are doing.
+- Practice using markdown formatting with bold, italics, and lists (use each of these at least once).
+- Make sure your outputs and scripts are saved in the appropriate folders. Keep proper coding etiquette (figures need to be pub quality as usual and you need to comment your code).
 
-*Create the most beautiful Quarto output you can in either an html, github doc, or pdf format. YOU MUST RENDER THE FILE
+# Palmer Penguins
 
-*Make sure you have headings with clear explanations of what you are doing. -Practice using markdown formatting with bold, italics, and lists (use each of these at least once). 
+## Background Information
 
-*Make sure your outputs and scripts are saved in the appropriate folders. Keep proper coding etiquette (figures need to be pub quality as usual and you need to comment your code).
+Data was taken of three species of Palmer Penguins in attempt to better understand male and female growth patterns over the years of 2007 and 2009. Data from this study could help us to better understand ...
 
-## Quarto
+## Data Collection
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+Scientists took data on three species: *Adelie*, *Gentoo*, and *Chinstrap*, on the islands of the islands of Torgersen, Biscoe, and Dream from 2007 to 2009.
+
+Data collected on each penguin included:
+
+- Sex
+- Bill Length (mm)
+- Flipper Length (mm)
+- Body Mass (g)
 
 ## Running Code
 
 When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
 
 ```{r}
-1 + 1
+## load libraries ##
+library(tidyverse)
+library(here)
+library(ggplot2)
+library(palmerpenguins)
+
+## load data ##
+glimpse(penguins)
+
+## clean data ##
+palmer_clean <- filter()
+
+
 ```
 
 You can add options to executable code like this
