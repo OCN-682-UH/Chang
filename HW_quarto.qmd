@@ -1,0 +1,36 @@
+---
+title: "HW_quarto"
+format: html
+editor: visual
+---
+
+Homework Instructions:
+
+*Take any of the data sheets you have already worked with in class and create at least one table and one figure in an Quarto file. 
+
+*Create the most beautiful Quarto output you can in either an html, github doc, or pdf format. YOU MUST RENDER THE FILE
+
+*Make sure you have headings with clear explanations of what you are doing. -Practice using markdown formatting with bold, italics, and lists (use each of these at least once). 
+
+*Make sure your outputs and scripts are saved in the appropriate folders. Keep proper coding etiquette (figures need to be pub quality as usual and you need to comment your code).
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
