@@ -1,0 +1,184 @@
+---
+title: "CW_quarto_2"
+author: "Jasmine Chang"
+format: 
+  html: 
+    theme: cosmo
+editor: visual
+
+knitr:
+  opts_chunk:
+    fig.path: "../outputs/" ## added the ../ because your qmd folder is in your scripts folder so we need to go up one directory and then into your output folder
+---
+
+Hiding warnings:
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+Load libraries
+
+```{r}
+## load libraries ##
+library(tidyverse)
+library(here)
+library(ggplot2)
+library(palmerpenguins)
+library(dplyr)
+library(kableExtra)
+
+## load data ##
+glimpse(penguins)
+
+## clean data ##
+palmer_clean <- penguins |>
+  select(species,sex,year,bill_length_mm,body_mass_g)
+glimpse(palmer_clean)
+
+```
+
+```{r}
+## ggplot ##
+#|out-width:70% # changes the size of your figure
+ggplot(data=palmer_clean,mapping = aes(x=species, y=bill_length_mm))+
+  geom_boxplot()
+```
+
+```{r}
+## ggplot ##
+#|fig-width: 3 # inputs exact size (inches) of figure
+#|fig-width: 5
+ggplot(data=palmer_clean,mapping = aes(x=species, y=bill_length_mm))+
+  geom_boxplot()
+
+
+```
+
+```{r}
+
+## ggplot ##
+#| fig-align:"center" # puts figure in the center of the rendering
+ggplot(data=palmer_clean,mapping = aes(x=species, y=bill_length_mm))+
+  geom_boxplot()
+
+```
+
+## Typing out a table by hand
+
+| Time   | Session  |   Topic |
+|:-------|:--------:|--------:|
+| *left* | *center* | *right* |
+| 01:00  |    1     | Anatomy |
+| 01:50  |          | *Break* |
+| 02:00  |    2     |  Tables |
+| 02:45  |          | *Break* |
+
+## Coding a table
+
+```{r}
+penguins |>
+  group_by(species) |>
+  summarise(billmean = mean(bill_length_mm, na.rm = TRUE)) |>
+  kbl() # make it a kable table
+```
+
+## Making it fancy
+
+```{r}
+penguins |>
+  group_by(species) |>
+  summarise(billmean = mean(bill_length_mm, na.rm = TRUE)) |>
+  kbl()  |> # make it a kable table
+  kable_classic() |> # add a theme
+  row_spec(2, bold = TRUE, color = "white", background = "red") |> # highlight row 2
+  kable_styling(full_width = FALSE) # don't make it so wide
+```
+
+## Cross Referencing
+
+One of Quarto’s biggest advantages for scientific writing: figures and tables are auto-numbered and linkable from your prose. Step 1: Give your chunk a label starting with fig-
+
+```{r}
+#| label: fig-penguin-bill
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-cap: Bill length vs. bill depth for three penguin species.
+
+ggplot(penguins, aes(x = bill_depth_mm, y = bill_length_mm, color = species)) +
+  geom_point() +
+  scale_color_viridis_d()
+```
+
+Step 2: Reference it anywhere in your prose with @fig-penguin-bill
+
+As shown in @fig-penguin-bill, bill dimensions differ clearly by species.
+
+# Cross-references:Tables
+
+```{r}
+#| label: tbl-penguin-means
+#| tbl-cap: "Mean bill length by species."
+
+penguins |>
+  group_by(species) |>
+  summarise(mean_bill = mean(bill_length_mm, na.rm = TRUE)) |>
+  kbl()
+```
+
+Mean bill lengths are summarised in @tbl-penguin-means.
+
+Prefix rules
+
+- Figures must use a fig- prefix — label: fig-my-plot
+- Tables must use a tbl- prefix — label: tbl-my-table
+- Quarto will error if the prefix doesn’t match the cross-reference type
+
+# Activity: Cross-references
+
+In your Quarto document: \* Create a code chunk that makes a ggplot — give it a fig- label and a fig-cap:
+
+```{r}
+#| label: fig-penguin-sex
+#| echo: false
+#| fig-cap: Penguin Sex vs. Bill Length for three penguin species.
+
+ggplot(penguins, aes(x = sex, y = bill_length_mm, color = species)) +
+  geom_boxplot() +
+  scale_color_viridis_d()
+```
+
+- Create a code chunk that makes a kbl() table — give it a tbl- label and a tbl-cap:
+
+```{r}
+#| label: tbl-penguin-means-2
+#| tbl-cap: "Mean body mass by species and year"
+
+penguins |>
+  group_by(year,species) |>
+  summarise(mean_mass = mean(body_mass_g, na.rm = TRUE),
+            .groups = "drop") |>
+  pivot_wider(
+    names_from = year,
+    values_from = mean_mass)|>
+  kbl()|>
+  kable_classic()
+
+```
+
+The mean body mass of penguins varied among species and years (see @tbl-penguin-means-2).
+
+- In a prose paragraph, reference both with @fig-... and @tbl-...
+
+The mean body mass varied among species and years, as shown in Table 1 @tbl-penguin-means-2. Figure @fig-bill-length shows the patterns of bill length in relation to sex among the three species.
+
+- Render and confirm Figure 1 and Table 1 appear as clickable cross-links
+
+#THEMES
+
+in your yaml
