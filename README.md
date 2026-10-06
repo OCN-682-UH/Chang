@@ -8,7 +8,7 @@
   * Data
   * Scripts
   * Outputs
-* Week_4
+* [Week_4](https://github.com/OCN-682-UH/Chang/tree/b02c622bcd0ce09d3c18306c81c0ef0efa357eea/Week_4)
   * Data
   * Scripts
   * Outputs
