@@ -5,6 +5,22 @@
   * Data - weightdata
   * Scripts
 * Week_3
+ * Data
+ * Scripts
+ * Outputs
+* Week_4
+ * Data
+ * Scripts
+ * Outputs
+* Week_5
+ * Data
+ * Scripts
+ * Outputs
+* Week_6
+ * Data
+ * Scripts
+ * Outputs
+ * https://01a11303-56e6-0f91-acb7-4110fc8341c5.share.connect.posit.cloud/
 
 ### **About me**
 Welina mai kākou me ke aloha! O wau ʻo Jasmine-Kuʻupua. Ua hānau ʻia, a hānai ʻia i Waimānalo Oʻahu. ʻAkahi nō au a hoʻomaka i kaʻu makahiki mua loa ma ke ʻano he haumana laeʻula ʻepekema kai ma ke kula nui o Hawaiʻi ma Mānoa. Pīhoihoi wau no kēia papa! 
