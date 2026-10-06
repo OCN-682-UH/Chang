@@ -4,7 +4,7 @@
 * [Week_2](https://github.com/OCN-682-UH/Chang/tree/3d8770383070de19851deb6f59a3fba3160a576c/Week_2)
   * Data - weightdata
   * Scripts
-* Week_3
+* [Week_3](https://github.com/OCN-682-UH/Chang/tree/3d8770383070de19851deb6f59a3fba3160a576c/Week_3)
   * Data
   * Scripts
   * Outputs
