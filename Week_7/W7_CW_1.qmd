@@ -1,0 +1,343 @@
+---
+title: "W7_CW_notes"
+author: "Jasmine Chang"
+format: html
+editor: visual
+---
+
+# Week 7 Lecture 1 Notes
+
+## Maps Part 1
+
+Various maps packages:
+
+{maps} Simple polygon basemaps (country, state, county) No {sf} Full-featured spatial data (GIS-grade) No {rnaturalearth} World/country/state polygons as sf objects No {maptiles} Download satellite/street tile basemaps No {leaflet} Interactive HTML maps No {tmap} Thematic maps, static and interactive No {ggmap}
+
+### Load Libraries
+
+```{r}
+library(tidyverse)
+library(here)
+library(maps)
+library(mapdata)
+library(mapproj)
+```
+
+### Read in Data
+
+```{r}
+# Population in California by county
+popdata <- read_csv(here("Week_7", "data", "CApopdata.csv"))
+
+# Seastar counts at field sites in California
+stars <- read_csv(here("Week_7", "data", "stars.csv"))
+```
+
+###The **map_data()** package
+
+map_data()-World
+
+```{r}
+world <- map_data("world")
+
+head(world)
+```
+
+map_data()-USA
+
+```{r}
+usa <- map_data("usa")
+
+head(usa)
+```
+
+map_data() — A Country
+
+```{r}
+italy <- map_data("italy")
+
+head(italy)
+```
+
+map_data() — US States
+
+```{r}
+states <- map_data("state")
+
+head(states)
+```
+
+map_data() — US Counties
+
+```{r}
+counties <- map_data("county")
+
+head(counties)
+```
+
+###Structure of the Data \* long — longitude. West of the prime meridian is negative. \* lat — latitude. \* order — the order in which ggplot connects the dots (polygon vertices). \* region / subregion — the region or subregion a set of points surrounds. \* group — This one is critical! Controls whether adjacent points are connected by lines. Points in the same group get connected; different groups cause ggplot to “lift the pen.” **warning**: Forgetting group = group in your aesthetic is the #1 cause of “crazy line” plots. You will do this. Everyone does.
+
+####Make a Map of the World
+
+```{r}
+ggplot() +
+  geom_polygon(data = world,
+               aes(x = long, y = lat,
+                   group = group))
+```
+
+What Happens Without group = group?
+
+```{r}
+ggplot() +
+  geom_polygon(data = world,
+               aes(x = long, y = lat))
+# essentially tries to connect all points to eachother
+```
+
+Add Color to Lines and Fill
+
+```{r}
+ggplot() +
+  geom_polygon(data = world,
+               aes(x = long, y = lat,
+                   group = group),
+               color = "red")
+```
+
+Fill by Region
+
+```{r}
+ggplot() +
+  geom_polygon(data = world,
+               aes(x = long, y = lat,
+                   group = group,
+                   fill = region),
+               color = "black") +
+  guides(fill = "none") #get rid of legend, because that would be too much
+```
+
+Change the theme
+
+```{r}
+ggplot() +
+  geom_polygon(data = world,
+               aes(x = long, y = lat,
+                   group = group,
+                   fill = region),
+               color = "black") +
+  guides(fill = "none") +
+  theme_minimal()
+```
+
+Make the Ocean Blue
+
+```{r}
+ggplot() +
+  geom_polygon(data = world,
+               aes(x = long, y = lat,
+                   group = group,
+                   fill = region),
+               color = "black") +
+  theme_minimal() +
+  guides(fill = "none") +
+  theme(panel.background =
+          element_rect(fill = "lightblue"))
+```
+
+Change the Map Projection The earth is not flat, but we visualize it in 2D — there are many projections to choose from. See {mapproj} for available options. Use a Mercator projection:
+
+```{r}
+ggplot() +
+  geom_polygon(data = world,
+               aes(x = long, y = lat,
+                   group = group,
+                   fill = region),
+               color = "black") +
+  theme_minimal() +
+  guides(fill = "none") +
+  theme(panel.background =
+          element_rect(fill = "lightblue")) +
+  coord_map(projection = "mercator", # there are different projections to choose from
+            xlim = c(-180, 180))
+```
+Use a sinusoidal projection:
+
+```{r}
+ggplot() +
+  geom_polygon(data = world,
+               aes(x = long, y = lat,
+                   group = group,
+                   fill = region),
+               color = "black") +
+  theme_minimal() +
+  guides(fill = "none") +
+  theme(panel.background =
+          element_rect(fill = "lightblue")) +
+  coord_map(projection = "sinusoidal",
+            xlim = c(-180, 180))
+```
+
+Map of Just California
+Filter the states dataset to California:
+```{r}
+CA_data <- states |>
+  filter(region == "california")
+```
+
+Make the map:
+```{r}
+ggplot() +
+  geom_polygon(data = CA_data,
+               aes(x = long, y = lat,
+                   group = group),
+               fill = "gold")+
+  labs(title = "State of California",
+       x="Longitude",
+       y="Latitude")+
+  theme(panel.background =
+          element_rect(fill = "lightblue"))+
+  coord_map(projection = "mercator")+ # makes it more to scale
+  theme_classic()
+
+```
+
+Adding Multiple Layers of Data
+Plot the population of every county in California.
+First, we need county-level polygons and join them to our population dataset.
+
+```{r}
+head(counties)[1:3, ]
+
+```
+
+```{r}
+head(popdata)
+```
+Wrangle the Data
+Make column names match before joining.
+
+```{r}
+CApop_county <- popdata |>
+  select("subregion" = County, Population) |>   # rename to match counties
+  inner_join(counties) |>
+  filter(region == "california")                 # some county names repeat in other states
+
+head(CApop_county)
+```
+
+Map of CA Population by County
+
+```{r}
+ggplot() +
+  geom_polygon(data = CApop_county,
+               aes(x = long, y = lat,
+                   group = group,
+                   fill = Population),
+               color = "black") +
+  coord_map() +
+  theme_void() # pretty, but hard to see differences in populations
+```
+Log Scale for Easier Interpretation
+```{r}
+ggplot() +
+  geom_polygon(data = CApop_county,
+               aes(x = long, y = lat,
+                   group = group,
+                   fill = Population),
+               color = "black") +
+  coord_map() +
+  theme_void() +
+  scale_fill_gradient(transform = "log10") 
+#transform = “log10” compresses the color scale so that less-populated counties are still visible alongside Los Angeles.
+```
+### Stars!!
+
+Add a Layer of Points
+The stars dataset has seastar counts (per m²) at field sites in California.
+
+```{r}
+head(stars)
+```
+
+Overlay Seastar Sites
+
+```{r}
+ggplot() +
+  geom_polygon(data = CApop_county,
+               aes(x = long, y = lat,
+                   group = group,
+                   fill = Population),
+               color = "black") +
+  geom_point(data = stars,
+             aes(x = long,
+                 y = lat)) +
+  coord_map() +
+  theme_void() +
+  scale_fill_gradient(transform = "log10")
+```
+Size Points by Seastar Count
+```{r}
+ggplot() +
+  geom_polygon(data = CApop_county,
+               aes(x = long, y = lat,
+                   group = group,
+                   fill = Population),
+               color = "black") +
+  geom_point(data = stars,
+             aes(x = long, y = lat,
+                 size = star_no)) +
+  coord_map() +
+  theme_void() +
+  scale_fill_gradient(transform = "log10")+
+    labs(size = "# Stars/m²") #better legend labels
+
+ggsave(here("Week_7", "output", "CApop.pdf")) #saves most recent plot by default
+```
+## {sf}
+
+Why {sf}?
+The {sf} (“simple features”) package is the current standard for spatial data in R.
+* Spatial objects are just data frames — all tidyverse verbs work on them
+* Handles projections, CRS transformations, spatial joins natively
+* geom_sf() replaces geom_polygon() — no need to manage group manually
+* Compatible with a rich ecosystem: {tigris}, {rnaturalearth}, {maptiles}, {leaflet}
+
+Load Libraries
+
+```{r}
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+
+```
+{rnaturalearth} — World Map with geom_sf()
+can make maps with a lot less code
+```{r}
+world_sf <- ne_countries(scale = "medium",
+                         returnclass = "sf")
+
+ggplot(world_sf) +
+  geom_sf(fill = "lightgray",
+          color = "white") +
+  theme_void()
+```
+Projections with coord_sf()
+coord_sf() handles projections using standard EPSG codes — much more rigorous than {mapproj}:
+Common CRS choices: "+proj=robin" (Robinson), 4326 (WGS84 / GPS), 3857 (Web Mercator).
+Learn more at map chapter in ggplot2 book.
+```{r}
+ggplot(world_sf) +
+  geom_sf(fill = "lightgray", color = "white") +
+  coord_sf(crs = "+proj=robin") + # Robinson projection
+  theme_void() +
+  labs(title = "Robinson Projection")
+```
+Total Awesome R Package — {ggdogs} 🐾
+
+```{r}
+library(ggdogs)
+ggplot(mtcars) +
+  geom_dog(aes(mpg, wt), dog = "pug", size = 8)
+```
+
