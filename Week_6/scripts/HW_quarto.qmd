@@ -72,8 +72,4 @@ The `echo: false` option disables the printing of code (only output is displayed
 
 # When youʻre done
 
-upload to cloud connect
-* click publish
-* post to connect cloud
-* document only
-* put the link from the document into READ.ME
+upload to cloud connect \* click publish \* post to connect cloud \* document only \* put the link from the document into READ.ME

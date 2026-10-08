@@ -23,7 +23,7 @@ Homework Instructions:
 
 ## Background Information
 
-Data was taken of three species of Palmer Penguins in attempt to better understand male and female growth patterns over the years of **2007**, **2008**, and **2009**. Data from this study could help us to better understand ...
+Data was taken of three species of Palmer Penguins in attempt to better understand male and female growth patterns over the years of **2007**, **2008**, and **2009**. Data from this study could help us to better understand fluctuations in weight patterns correlating to the different species.
 
 ## Data Collection
 
