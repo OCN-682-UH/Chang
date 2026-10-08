@@ -1,0 +1,153 @@
+---
+title: "HW_quarto"
+author: Jasmine Chang
+format: 
+  html: 
+    theme: cosmo
+editor: visual
+
+knitr:
+  opts_chunk:
+    fig.path: "../outputs/" ## added the ../ because your qmd folder is in your scripts folder so we need to go up one directory and then into your output folder
+---
+
+Homework Instructions:
+
+- Take any of the data sheets you have already worked with in class and create at least one table and one figure in an Quarto file.
+- Create the most beautiful Quarto output you can in either an html, github doc, or pdf format. YOU MUST RENDER THE FILE
+- Make sure you have headings with clear explanations of what you are doing.
+- Practice using markdown formatting with bold, italics, and lists (use each of these at least once).
+- Make sure your outputs and scripts are saved in the appropriate folders. Keep proper coding etiquette (figures need to be pub quality as usual and you need to comment your code).
+
+# Palmer Penguins
+
+## Background Information
+
+Data was taken of three species of Palmer Penguins in attempt to better understand male and female growth patterns over the years of **2007**, **2008**, and **2009**. Data from this study could help us to better understand ...
+
+## Data Collection
+
+Scientists took data on three species: Adelie(*Pygoscelis adeliae*), Gentoo(*Pygoscelis papua*), and Chinstrap (*Pygoscelis antarctica*) on the islands of the islands of Torgersen, Biscoe, and Dream from the year 2007 to 2009.
+
+Data collected on each penguin included:
+
+- Sex
+- Bill Length (mm)
+- Flipper Length (mm)
+- Body Mass (g)
+
+I hope to investigate the changes of flipper length and body length over time when looking at the three islands.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+## load libraries ##
+library(tidyverse)
+library(here)
+library(ggplot2)
+library(palmerpenguins)
+library(dplyr)
+library(patchwork)
+library(ggrepel)
+library(gganimate)
+library(gifski)
+library(plotly)
+library(magick)
+library(kableExtra)
+```
+
+```{r}
+## load data ##
+glimpse(penguins)
+```
+
+```{r}
+## clean data ##
+palmer_clean <- penguins |>
+  select(species,sex,year,bill_length_mm,body_mass_g)
+glimpse(palmer_clean)
+```
+
+```{r}
+#| label: tbl-penguin-means
+#| tbl-cap: "Mean body mass by species and year"
+
+penguins |>
+  group_by(year,species) |>
+  summarise(mean_mass = mean(body_mass_g, na.rm = TRUE),
+            .groups = "drop") |>
+  pivot_wider(
+    names_from = year,
+    values_from = mean_mass)|>
+  kbl()|>
+  kable_classic() |>
+  row_spec(3, bold = TRUE, color = "white", background = "green") |> # highlight row 3
+  kable_styling(full_width = FALSE) # don't make it so wide
+```
+
+It is seen in @tbl-penguin-means the differences in mean body mass among the three penguin species from 2007 to 2009. Gentoo has an overall higher mean body mass while Adelie and Chinstrap are somewhat within the same range.
+
+```{r}
+## ggplot Adelie ##
+
+mass_means <- penguins |>
+  group_by(year,species) |>
+  summarise(
+    mean_mass=mean(body_mass_g,na.rm=TRUE),
+    .groups = "drop")
+
+means_adelie <- mass_means|>
+  filter(species=="Adelie") |>
+  ggplot(aes(x=year,y=mean_mass))+
+  geom_line(color="green") +
+  labs(title="Adelie Mean Mass",
+       x="Year",
+       y=NULL)
+means_adelie
+
+```
+
+```{r}
+## ggplot Chinstrap ##
+
+means_chinstrap <- mass_means|>
+  filter(species=="Chinstrap") |>
+  ggplot(aes(x=year,y=mean_mass))+
+  geom_line(color="red") +
+  labs(title="Chinstrap Mean Mass",
+       x="Year",
+       y=NULL)
+means_chinstrap
+```
+
+```{r}
+## ggplot Gentoo ##
+
+means_gentoo <- mass_means|>
+  filter(species=="Gentoo") |>
+  ggplot(aes(x=year,y=mean_mass))+
+  geom_line(color="blue") +
+  labs(title="Gentoo Mean Mass",
+       x="Year",
+       y="Mean Body Mass (g)")
+means_gentoo
+```
+
+```{r}
+## Combining the three ##
+#| label: fig-penguin-mass
+#| echo: false
+#| fig-cap: Penguin Mean Body Mass vs. Year Length for three penguin species.
+
+means_gentoo+means_chinstrap+means_adelie+
+plot_layout(guides = 'collect')
+
+```
+
+In @fig-means-mass we can observe the changes of body mass of the three species from 2007 to 2009. These figures show that in 2008, Gentoo penguins had a major drop in body mass, while Chinstrap and Adelie had a major peak in body mass.
+
+# When youʻre done
+
+upload to cloud connect \* click publish \* post to connect cloud \* document only \* put the link from the document into READ.ME
