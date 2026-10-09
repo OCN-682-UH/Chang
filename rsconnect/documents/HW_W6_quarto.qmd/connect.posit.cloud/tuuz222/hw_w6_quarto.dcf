@@ -1,0 +1,12 @@
+name: hw_w6_quarto
+title: HW_W6_quarto
+username: tuuz222
+account: tuuz222
+server: connect.posit.cloud
+hostUrl: https://api.connect.posit.cloud/v1
+appId: 01a11d68-ed85-ea26-6dcd-3c4c31c5e193
+bundleId:
+url: https://connect.posit.cloud/tuuz222/content/01a11d68-ed85-ea26-6dcd-3c4c31c5e193
+version: 1
+asMultiple: FALSE
+asStatic: TRUE
