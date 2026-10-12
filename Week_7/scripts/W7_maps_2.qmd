@@ -1,0 +1,94 @@
+---
+title: "W7_Maps_2"
+author: "Jasmine Chang"
+format: html
+editor: visual
+---
+
+## Maps Lecture 2
+
+
+
+### Load Libraries
+```{r}
+library(tidyverse)
+library(here)
+library(sf)
+library(maptiles)
+library(tidyterra)
+library(leaflet)
+library(tidygeocoder)
+library(ggspatial)
+```
+
+### Data for today
+
+```{r}
+ChemData <- read_csv(here("Week_7", "data", "chemicaldata_maunalua.csv"))
+
+glimpse(ChemData)
+```
+
+###What Is a Map Tile?
+Online maps (Google, OpenStreetMap, ESRI) are not single images — they are made of thousands of small 256 × 256 pixel tiles stitched together.
+  * This is exactly how Google Maps works — {maptiles} just accesses the same tiles directly, using providers that allow free access.
+* Tiles are organized by zoom level and grid position
+* At zoom 1, a handful of tiles cover the whole world
+* At zoom 17, thousands of tiles cover a single neighborhood
+* {maptiles} figures out which tiles you need, downloads them, and stitches them into one image
+
+###Step 1 — Define Your Area of Interest
+get_tiles() needs to know what area to download. We give it a bounding box — a rectangle defined by its corner coordinates.
+
+```{r}
+# Define a bounding box around Wailupe, Oahu
+# xmin/xmax = westmost/eastmost longitude
+# ymin/ymax = southernmost/northernmost latitude
+wailupe_bbox <- st_as_sfc(
+  st_bbox(c(xmin = -157.772, ymin = 21.267,
+            xmax = -157.752, ymax = 21.281),
+          crs = 4326) # crs = 4326 means WGS84 — the lat/lon system your GPS uses
+)
+```
+
+st_bbox() creates the bounding box rectangle.
+st_as_sfc() converts it to an {sf} geometry object so {maptiles} can read it.
+crs = 4326 specifies WGS84 — almost all GPS and web map data uses this coordinate system.
+
+###Step 2 — Download the Tiles
+
+```{r}
+tiles_satellite <- get_tiles(
+  wailupe_bbox,               # the area to download
+  provider = "Esri.WorldImagery", # which tile source to use
+  zoom = 16,                  # level of detail (3 = continent, 20 = building)
+  crop = TRUE,                # clip to our exact bbox (vs. slightly larger)
+  cachedir = here("Week_07", "data", "tiles_cache") # save tiles to disk
+)
+```
+cachedir saves the raw tile images to disk. The next time you render this document, {maptiles} will read from disk instead of re-downloading. Always include this when building presentations.
+
+####What Does get_tiles() Return?
+
+A SpatRaster — a raster image (grid of pixels) from the {terra} package.
+* A raster is just a matrix of pixel values — like a photo
+* tiles_satellite has 3 layers: red, green, and blue
+* We can’t use geom_raster() because that expects a data frame, not a terra object
+* {tidyterra} bridges this gap with geom_spatraster_rgb()
+
+```{r}
+class(tiles_satellite)
+```
+
+###Step 3 — Plot with geom_spatraster_rgb()
+
+```{r}
+# geom_spatraster_rgb() is from {tidyterra}
+# It reads the 3 color layers and renders them as a photo
+ggplot() +
+  geom_spatraster_rgb(data = tiles_satellite) +
+  coord_sf(crs = 4326) +
+  theme_minimal()
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
