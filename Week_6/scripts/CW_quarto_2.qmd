@@ -1,7 +1,9 @@
 ---
 title: "CW_quarto_2"
 author: "Jasmine Chang"
-format: html
+format: 
+  html: 
+    theme: cosmo
 editor: visual
 
 knitr:
@@ -9,7 +11,7 @@ knitr:
     fig.path: "../outputs/" ## added the ../ because your qmd folder is in your scripts folder so we need to go up one directory and then into your output folder
 ---
 
-Hiding warnings: 
+Hiding warnings:
 
 ## Quarto
 
@@ -103,19 +105,80 @@ One of Quarto’s biggest advantages for scientific writing: figures and tables 
 
 ```{r}
 #| label: fig-penguin-bill
-#| fig-cap: "Bill length vs. bill depth for three penguin species."
 #| echo: false
+#| message: false
+#| warning: false
+#| fig-cap: Bill length vs. bill depth for three penguin species.
 
 ggplot(penguins, aes(x = bill_depth_mm, y = bill_length_mm, color = species)) +
   geom_point() +
   scale_color_viridis_d()
 ```
 
-You can add options to executable code like this
+Step 2: Reference it anywhere in your prose with @fig-penguin-bill
+
+As shown in @fig-penguin-bill, bill dimensions differ clearly by species.
+
+# Cross-references:Tables
 
 ```{r}
-#| echo: false
-2 * 2
+#| label: tbl-penguin-means
+#| tbl-cap: "Mean bill length by species."
+
+penguins |>
+  group_by(species) |>
+  summarise(mean_bill = mean(bill_length_mm, na.rm = TRUE)) |>
+  kbl()
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+Mean bill lengths are summarised in @tbl-penguin-means.
+
+Prefix rules
+
+- Figures must use a fig- prefix — label: fig-my-plot
+- Tables must use a tbl- prefix — label: tbl-my-table
+- Quarto will error if the prefix doesn’t match the cross-reference type
+
+# Activity: Cross-references
+
+In your Quarto document: \* Create a code chunk that makes a ggplot — give it a fig- label and a fig-cap:
+
+```{r}
+#| label: fig-penguin-sex
+#| echo: false
+#| fig-cap: Penguin Sex vs. Bill Length for three penguin species.
+
+ggplot(penguins, aes(x = sex, y = bill_length_mm, color = species)) +
+  geom_boxplot() +
+  scale_color_viridis_d()
+```
+
+- Create a code chunk that makes a kbl() table — give it a tbl- label and a tbl-cap:
+
+```{r}
+#| label: tbl-penguin-means-2
+#| tbl-cap: "Mean body mass by species and year"
+
+penguins |>
+  group_by(year,species) |>
+  summarise(mean_mass = mean(body_mass_g, na.rm = TRUE),
+            .groups = "drop") |>
+  pivot_wider(
+    names_from = year,
+    values_from = mean_mass)|>
+  kbl()|>
+  kable_classic()
+
+```
+
+The mean body mass of penguins varied among species and years (see @tbl-penguin-means-2).
+
+- In a prose paragraph, reference both with @fig-... and @tbl-...
+
+The mean body mass varied among species and years, as shown in Table 1 @tbl-penguin-means-2. Figure @fig-bill-length shows the patterns of bill length in relation to sex among the three species.
+
+- Render and confirm Figure 1 and Table 1 appear as clickable cross-links
+
+#THEMES
+
+in your yaml

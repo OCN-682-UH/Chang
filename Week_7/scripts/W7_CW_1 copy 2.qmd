@@ -161,6 +161,7 @@ ggplot() +
   coord_map(projection = "mercator", # there are different projections to choose from
             xlim = c(-180, 180))
 ```
+
 Use a sinusoidal projection:
 
 ```{r}
@@ -178,14 +179,15 @@ ggplot() +
             xlim = c(-180, 180))
 ```
 
-Map of Just California
-Filter the states dataset to California:
+Map of Just California Filter the states dataset to California:
+
 ```{r}
 CA_data <- states |>
   filter(region == "california")
 ```
 
 Make the map:
+
 ```{r}
 ggplot() +
   geom_polygon(data = CA_data,
@@ -202,9 +204,7 @@ ggplot() +
 
 ```
 
-Adding Multiple Layers of Data
-Plot the population of every county in California.
-First, we need county-level polygons and join them to our population dataset.
+Adding Multiple Layers of Data Plot the population of every county in California. First, we need county-level polygons and join them to our population dataset.
 
 ```{r}
 head(counties)[1:3, ]
@@ -214,8 +214,8 @@ head(counties)[1:3, ]
 ```{r}
 head(popdata)
 ```
-Wrangle the Data
-Make column names match before joining.
+
+Wrangle the Data Make column names match before joining.
 
 ```{r}
 CApop_county <- popdata |>
@@ -238,7 +238,9 @@ ggplot() +
   coord_map() +
   theme_void() # pretty, but hard to see differences in populations
 ```
+
 Log Scale for Easier Interpretation
+
 ```{r}
 ggplot() +
   geom_polygon(data = CApop_county,
@@ -251,10 +253,10 @@ ggplot() +
   scale_fill_gradient(transform = "log10") 
 #transform = “log10” compresses the color scale so that less-populated counties are still visible alongside Los Angeles.
 ```
+
 ### Stars!!
 
-Add a Layer of Points
-The stars dataset has seastar counts (per m²) at field sites in California.
+Add a Layer of Points The stars dataset has seastar counts (per m²) at field sites in California.
 
 ```{r}
 head(stars)
@@ -276,7 +278,9 @@ ggplot() +
   theme_void() +
   scale_fill_gradient(transform = "log10")
 ```
+
 Size Points by Seastar Count
+
 ```{r}
 ggplot() +
   geom_polygon(data = CApop_county,
@@ -294,14 +298,10 @@ ggplot() +
 
 ggsave(here("Week_7", "output", "CApop.pdf")) #saves most recent plot by default
 ```
+
 ## {sf}
 
-Why {sf}?
-The {sf} (“simple features”) package is the current standard for spatial data in R.
-* Spatial objects are just data frames — all tidyverse verbs work on them
-* Handles projections, CRS transformations, spatial joins natively
-* geom_sf() replaces geom_polygon() — no need to manage group manually
-* Compatible with a rich ecosystem: {tigris}, {rnaturalearth}, {maptiles}, {leaflet}
+Why {sf}? The {sf} (“simple features”) package is the current standard for spatial data in R. \* Spatial objects are just data frames — all tidyverse verbs work on them \* Handles projections, CRS transformations, spatial joins natively \* geom_sf() replaces geom_polygon() — no need to manage group manually \* Compatible with a rich ecosystem: {tigris}, {rnaturalearth}, {maptiles}, {leaflet}
 
 Load Libraries
 
@@ -311,8 +311,9 @@ library(rnaturalearth)
 library(rnaturalearthdata)
 
 ```
-{rnaturalearth} — World Map with geom_sf()
-can make maps with a lot less code
+
+{rnaturalearth} — World Map with geom_sf() can make maps with a lot less code
+
 ```{r}
 world_sf <- ne_countries(scale = "medium",
                          returnclass = "sf")
@@ -322,10 +323,9 @@ ggplot(world_sf) +
           color = "white") +
   theme_void()
 ```
-Projections with coord_sf()
-coord_sf() handles projections using standard EPSG codes — much more rigorous than {mapproj}:
-Common CRS choices: "+proj=robin" (Robinson), 4326 (WGS84 / GPS), 3857 (Web Mercator).
-Learn more at map chapter in ggplot2 book.
+
+Projections with coord_sf() coord_sf() handles projections using standard EPSG codes — much more rigorous than {mapproj}: Common CRS choices: "+proj=robin" (Robinson), 4326 (WGS84 / GPS), 3857 (Web Mercator). Learn more at map chapter in ggplot2 book.
+
 ```{r}
 ggplot(world_sf) +
   geom_sf(fill = "lightgray", color = "white") +
@@ -333,6 +333,7 @@ ggplot(world_sf) +
   theme_void() +
   labs(title = "Robinson Projection")
 ```
+
 Total Awesome R Package — {ggdogs} 🐾
 
 ```{r}
@@ -340,4 +341,3 @@ library(ggdogs)
 ggplot(mtcars) +
   geom_dog(aes(mpg, wt), dog = "chihuahua", size = 4)
 ```
-
