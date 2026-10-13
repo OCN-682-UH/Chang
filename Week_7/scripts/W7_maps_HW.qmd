@@ -10,6 +10,7 @@ editor: visual
 Where have they all landed?
 
 #### Load Libraries
+
 ```{r}
 library(tidyverse)
 library(here)
@@ -21,6 +22,7 @@ library(ggstar)
 ```
 
 #### Load Data
+
 ```{r}
 meteorites <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2019/2019-06-11/meteorites.csv") |>
  filter(year %in% 2000:2005) |>
@@ -28,13 +30,17 @@ meteorites <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience
 
 glimpse(meteorites)
 ```
+
 map_data() — World
+
 ```{r}
 world <- map_data("world")
 
 head(world)
 ```
+
 #### Map of the World
+
 ```{r}
 ggplot() +
   geom_polygon(data = world,
@@ -45,7 +51,7 @@ ggplot() +
   guides(fill = "none") #get rid of legend, because that would be too much
 ```
 
-#### Mapping Meteorites 
+#### Mapping Meteorites
 
 ```{r}
 #| label: fig-meteorites
@@ -74,4 +80,5 @@ ggplot() +
 
 ggsave(here("Week_7", "output", "Meteorites_HW.pdf")) #saves most recent plot by default
 ```
-In @fig-meteorites we can observe fallen meteorites world wide according to their mass. 
+
+In @fig-meteorites we can observe fallen meteorites world wide according to their mass.
