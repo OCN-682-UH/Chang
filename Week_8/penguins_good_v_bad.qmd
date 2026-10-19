@@ -1,0 +1,198 @@
+---
+title: "Good Plot vs Bad Plot"
+author: "Jasmine Chang"
+format:
+  html:
+    code-fold: TRUE
+    code-summary: "Show code"
+    toc: TRUE
+    toc-depth: 4
+    toc-location: right
+    toc-title: "Table of Contents"
+    fig-align: center
+warning: FALSE
+theme: cosmo
+editor: visual
+
+---
+# Good Plot vs Bad Plot
+# Many Penguins!!!
+
+
+```{r}
+#| echo: TRUE
+
+library(tidytuesdayR)
+library(tidyverse)
+library(here)
+library(ggplot2)
+library(patchwork)
+library(plotly)
+library(dplyr)
+library(ggfx)
+
+```
+
+
+## Load Data
+```{r}
+
+many_penguins <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-07-14/many_penguins.csv')
+
+glimpse(many_penguins)
+```
+## Clean Data
+```{r}
+
+many_clean<-many_penguins|>
+  filter(sex=="F", na.rm=TRUE)|>
+  drop_na()
+
+glimpse(many_clean)
+```
+
+## Good Plot
+```{r}
+#| label: fig-penguins-pretty
+#| echo: FALSE
+#| fig-cap: Correlation Between Wing and Tail Length in Female Penguins
+
+Aptenodytes<- plot_ly( #plotly creates an interactive plot
+  data = many_clean |> #requires very different code than ggplot
+    filter(genus == "Aptenodytes"),
+  x = ~tail.length,
+  y = ~wing.length,
+  type = "scatter",
+  mode = "markers",
+  name = "Aptenodytes",
+  showlegend = TRUE, #run these on each graph so theres a complete legend when combined
+  marker = list(size = 8, color="red"))|>
+  layout(title = "Aptenodytes",
+         xaxis = list(title = ""),
+         yaxis = list(title = "Wing Length (mm)"))|>
+  add_lines(method="lm",showlegend=FALSE) #otherwise, will be a legend for each genus line?
+
+Eudyptes<-plot_ly(
+  data = many_clean |>
+    filter(genus == "Eudyptes"),
+  x = ~tail.length,
+  y = ~wing.length,
+  type = "scatter",
+  mode = "markers",
+  name = "Eudyptes",
+  showlegend = TRUE,
+  marker = list(size = 8, color="purple"))|>
+  layout(title = "Eudyptes", #"layout" instead of "labs"
+         xaxis = list(title = "Tail Length (mm)"),
+         yaxis = list(title = ""))|>
+  add_lines(method="lm",showlegend=FALSE)
+
+Pygoscelis<-plot_ly(
+  data = many_clean |>
+    filter(genus == "Pygoscelis"),
+  x = ~tail.length,
+  y = ~wing.length,
+  type = "scatter",
+  mode = "markers",
+  name = "Pygoscelis",
+  showlegend = TRUE,
+  marker = list(size = 8, color="blue"))|>
+  layout(title = "Pygoscelis",
+         xaxis = list(title = ""),
+         yaxis = list(title = ""))|>
+  add_lines(method="lm", showlegend=FALSE)
+
+subplot(
+  Aptenodytes, #adding the three plots together with ","
+  Eudyptes,
+  Pygoscelis,
+  titleX = TRUE, #makes sure that axis titles are present
+  titleY = TRUE
+) |>
+  layout(
+    title = list(
+      text = "Female Penguins<br><sup>Tail Length vs Wing Length<sup>" 
+    ),
+      showlegend = TRUE,
+    legend = list(
+      title = list(text = "Genus")
+    )
+  )
+# couldn't figure out how to make a linear line like geom_smooth
+```
+The wing length and tail length among the female penguins within the three genus (Aptenodytes, Eudyptes, and Pygoscelis) are represented in @fig-penguins-pretty. 
+
+### What's good about this plot?
+
+#### Clarity
+
+* Not too many points, variables, or series
+* Clear legend
+* Simple and organized
+  * Emphasis put on three genus that are in separate plots
+* Legend is clear and legible
+  * Follow a logical order
+* No special symbols or lines
+  
+#### Aesthetics
+
+* Not cluttered
+  * No unnecessary elements 
+* Thoughtful color schemes
+* Simple and legible fonts
+
+## Bad Plot
+
+```{r}
+#| label: fig-penguins_ugly
+#| echo: FALSE
+#| fig-cap: No Idea What's Going on Here
+
+ggplot(data=many_penguins,
+                     aes(x=tail.length,y=wing.length,
+                     color=species))+ # species instead of genus makes it much more confusing
+   labs(title="Penguins",x="Tail Length (in)",
+       y="Wing Length (in)")+
+         geom_boxplot(size=5)+ #make large un readable
+  geom_smooth(method="lm", color="blue")+ #add line for fun, it tells us nothing
+  theme(
+    panel.background = element_rect(fill = "purple"), #ugly backdrop
+    plot.background = element_rect(fill = "pink"), #more ugly color
+    element_text(family = "Apple Chancery"), #fabulous font everywhere
+    plot.title = element_text(
+      family = "Apple Chancery", #had to type this out for each axis, is there an easier way?
+      size = 25,
+      face = "bold"
+    ),
+    axis.title = element_text(
+      family = "Apple Chancery",
+      size = 20 #unnecessarily big
+    ),
+    axis.text = element_text(
+      family = "Apple Chancery",
+      size = 20
+    )
+  )
+
+```
+
+In @fig-penguins_ugly, we can have a very hard time interpreting what is going on for a number of reasons... This plot seems to compare wing and tail across a number of penguin species. 
+
+### What's bad about this plot?
+
+#### Clarity
+
+* There are too many data points
+* The legend is overwhelming
+* Nothing is put into context
+* The title is vague and unclear
+* There is an unnecessary trend line
+
+#### Aesthetics
+
+* Very cluttered
+  * Boxes are too large and close together
+* The coloring is distracting and confusing
+  *Grid color and species colors
+* Distracting and large font
+  * Title font and legend font don't match

@@ -1,0 +1,341 @@
+---
+title: "W8_CW_1"
+author: "Jasmine Chang"
+format: html
+editor: visual
+---
+
+## Functional Programming
+
+Load Libraries
+```{r}
+library(tibble)
+library(tidyverse)
+```
+
+
+### When do you need a function?
+Use a function when:
+You have a task you want to use more than once
+You want to keep your script clean and organized
+You want to avoid mistakes with copy and paste
+You minimize places where you need to update your code
+
+### Example: Rescaling data
+Imagine you want to rescale multiple columns to lie between 0 and 1 using: 𝑥−min(𝑥)max(𝑥)−min(𝑥)
+Set up a dataframe with random numbers:
+
+(set.seed) can set it so that you get the exact same number every time.
+
+```{r}
+df <- tibble(
+  a = rnorm(10), # rescaling all data between 0 and 1
+  b = rnorm(10), # 10 means random number, randomly distributed
+  c = rnorm(10),
+  d = rnorm(10)
+)
+
+head(df)
+```
+
+
+### Without a function: Manual rescaling
+
+```{r}
+df <- df |>
+  mutate(a = (a - min(a, na.rm = TRUE)) / (max(a, na.rm = TRUE) - min(a, na.rm = TRUE)))
+# "a" should have numbers not less than zero and not greater than one
+head(df)
+```
+
+### Copy and paste for each column
+
+```{r}
+df <- df |>
+  mutate(
+    a = (a - min(a, na.rm = TRUE)) / (max(a, na.rm = TRUE) - min(a, na.rm = TRUE)),
+    b = (b - min(b, na.rm = TRUE)) / (max(b, na.rm = TRUE) - min(b, na.rm = TRUE)),
+    c = (c - min(c, na.rm = TRUE)) / (max(c, na.rm = TRUE) - min(c, na.rm = TRUE)),
+    d = (d - min(d, na.rm = TRUE)) / (max(d, na.rm = TRUE) - min(d, na.rm = TRUE))
+  )
+```
+
+Writing it out like this gives room for error, this is why functions are better
+
+## Writing a Function
+### Create a reusable rescaling function
+
+```{r}
+rescale01 <- function(x) {
+  value <- (x - min(x, na.rm = TRUE)) / (max(x, na.rm = TRUE) - min(x, na.rm = TRUE))
+  return(value)
+}
+
+df |>
+  mutate(
+    a = rescale01(a),
+    b = rescale01(b), # much easier than re-writing this code^ for all of the letters
+    c = rescale01(c),
+    d = rescale01(d)
+  )
+```
+
+### Even better!
+
+```{r}
+df |>
+  mutate(across(everything(), rescale01))
+#mutates everything without typing any letters
+```
+### Anatomy of a Function
+
+Every function has four key parts:
+1. Function name — rescale01 describes what it does (rescales to 0-1)
+2. Arguments — function(x) lists the inputs
+  * Multiple arguments: function(x, y, z)
+3. Function body — The { } block containing the code
+4. Return statement — What the function returns
+
+#### Example: Fahrenheit to Celsius
+Step 1: The conversion formula
+
+```{r}
+temp_C <- (temp_F - 32) * 5 / 9
+```
+
+Type out the functions that you need, for unit conversions or whatever else that you can apply to other codes. 
+
+Step 2: Create the function structure
+
+```{r}
+f_to_celsius <- function() {
+  # code goes here
+}
+```
+
+Step 3: Add the formula
+
+```{r}
+f_to_celsius <- function() {
+  temp_C <- (temp_F - 32) * 5 / 9
+}
+```
+^^ This isnʻt going to work yet. "Temp_F" is the variable that will change case by case.
+
+Step 4: Add the argument
+
+```{r}
+f_to_celsius <- function(temp_F) {
+  temp_C <- (temp_F - 32) * 5 / 9
+}
+```
+
+Step 5: Add the return statement
+
+```{r}
+f_to_celsius <- function(temp_F) {
+  temp_C <- (temp_F - 32) * 5 / 9
+  return(temp_C) # this is the value that will be returned to you, always in celcius
+}
+```
+
+Step 6: Test it
+
+```{r}
+f_to_celsius(90)
+```
+
+### Practical
+#### Celsius to Kelvin
+
+```{r}
+celsius_to_kelvin <- function(temp_celsius) {
+  temp_K <-(temp_celsius+273.15)
+  return(temp_K)
+}
+```
+
+
+Test it: woohoo!!
+```{r}
+celsius_to_kelvin(15)
+```
+
+### Making Plot Functions
+
+Why turn plots into functions?
+If you have a plot format you use repeatedly, create a function to:
+* Write it once, use it many times
+* Maintain consistency across figures
+* Save time and reduce errors
+Let’s create a reusable plot function with the penguin dataset:
+
+```{r}
+library(palmerpenguins)
+library(PNWColors) # pacific northwest colors
+
+pal <- pnw_palette("Lake", 3, type = "discrete")
+
+ggplot(penguins, aes(x = body_mass_g, y = bill_length_mm, color = island)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_color_manual("Island", values = pal) +
+  theme_bw()
+```
+
+#### Name and Set up the Function
+
+```{r}
+myplot<- function() {
+  pal <- pnw_palette("Lake", 3, type="discrete")
+  
+  ggplot(penguins, aes(x=body_mass_g, y=bill_length_mm, color=island))+
+    geom_point()+
+    geom_smooth(method="lm")+
+    scale_color_manual("Island", values=pal)+
+    theme_bw()
+} # within this function, the arguments that we want to change will be x and y
+```
+
+#### Add Flexible Arguments
+make arguments broad so the function works with any data
+
+```{r}
+myplot <- function(data, x, y) {
+  pal <- pnw_palette("Lake", 3, type = "discrete")
+  
+  ggplot(data, aes(x = x, y = y, color = island)) +
+    geom_point() +
+    geom_smooth(method = "lm") +
+    scale_color_manual("Island", values = pal) +
+    theme_bw()
+}
+```
+
+#### Test it
+
+```{r}
+myplot(data = penguins, x = body_mass_g, y = bill_length_mm)
+# this doesnʻt work because there arenʻt brackets around argument data
+```
+
+#### Use curly-curly {{}} for column names
+The {{}} operator from {rlang} (part of tidyverse) lets us pass column names as arguments:
+
+```{r}
+myplot <- function(data, x, y) {
+  pal <- pnw_palette("Lake", 3, type = "discrete")
+  
+  ggplot(data, aes(x = {{x}}, y = {{y}}, color = island)) +
+    geom_point() +
+    geom_smooth(method = "lm") +
+    scale_color_manual("Island", values = pal) +
+    theme_bw()
+}
+```
+
+#### Test again
+
+```{r}
+myplot(data = penguins, x = body_mass_g, y = bill_length_mm)
+```
+
+#### Test with Different Variables
+
+```{r}
+myplot(data = penguins, x = body_mass_g, y = flipper_length_mm)
+```
+
+### Add Different Arguments
+Set defaults so users donʻt have to specify everything
+
+```{r}
+myplot <- function(data = penguins, x, y) {
+  pal <- pnw_palette("Lake", 3, type = "discrete")
+  
+  ggplot(data, aes(x = {{x}}, y = {{y}}, color = island)) +
+    geom_point() +
+    geom_smooth(method = "lm") +
+    scale_color_manual("Island", values = pal) +
+    theme_bw()
+} # Now with this function, you can change the entire data frame from a simple line of code.
+```
+
+#### Now you can call it with just the column arguments:
+
+```{r}
+myplot(x = body_mass_g, y = flipper_length_mm)
+```
+
+#### Layer onto the Function
+
+```{r}
+myplot(x = body_mass_g, y = flipper_length_mm) +
+  labs(x = "Body mass (g)", y = "Flipper length (mm)")
+```
+
+### Adding Control Flow with if-else
+
+#### the if-else statement
+Use if-else to execute different code based on a condition:
+
+```{r}
+a <- 4 # a equals 4
+b <- 5 # b equals 5
+
+if (a > b) { # if a is bigger than b, f=20
+  f <- 20
+} else {
+  f <- 10 # if its not, f=10
+}
+
+f
+```
+
+#### Making your function more flexible
+Add an argument to toggle features on/off:
+```{r}
+myplot <- function(data = penguins, x, y, lines = TRUE) { # its automatically on, but can easily turn it off
+  pal <- pnw_palette("Lake", 3, type = "discrete")
+  
+  if (lines == TRUE) {
+    ggplot(data, aes(x = {{x}}, y = {{y}}, color = island)) +
+      geom_point() +
+      geom_smooth(method = "lm") +
+      scale_color_manual("Island", values = pal) +
+      theme_bw()
+  } else {  # if the lines are not equal to true, then no geom_smooth(line)
+    ggplot(data, aes(x = {{x}}, y = {{y}}, color = island)) +
+      geom_point() +
+      scale_color_manual("Island", values = pal) +
+      theme_bw()
+  }
+}
+```
+
+Test with lines (default)
+
+```{r}
+myplot(x = body_mass_g, y = flipper_length_mm)
+```
+
+Test without lines
+
+```{r}
+myplot(x = body_mass_g, y = flipper_length_mm, lines = FALSE)
+```
+
+### Today’s awesome R package: {BRRR}
+Sounds with your favorite rappers!
+For snoop:
+```{r}
+library(BRRR)
+
+skrrrahh("snoop")
+```
+
+For biggie
+```{r}
+skrrrahh("biggie")
+```
+
