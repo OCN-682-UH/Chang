@@ -70,7 +70,7 @@ Aptenodytes<- plot_ly( #plotly creates an interactive plot
   layout(title = "Aptenodytes",
          xaxis = list(title = ""),
          yaxis = list(title = "Wing Length (mm)"))|>
-  add_lines(method="lm",showlegend=FALSE) #otherwise, will be a legend for each genus line?
+  add_lines(showlegend=FALSE) #otherwise, will be a legend for each genus line?
 
 Eudyptes<-plot_ly(
   data = many_clean |>
@@ -85,7 +85,7 @@ Eudyptes<-plot_ly(
   layout(title = "Eudyptes", #"layout" instead of "labs"
          xaxis = list(title = "Tail Length (mm)"),
          yaxis = list(title = ""))|>
-  add_lines(method="lm",showlegend=FALSE)
+  add_lines(showlegend=FALSE)
 
 Pygoscelis<-plot_ly(
   data = many_clean |>
@@ -100,7 +100,7 @@ Pygoscelis<-plot_ly(
   layout(title = "Pygoscelis",
          xaxis = list(title = ""),
          yaxis = list(title = ""))|>
-  add_lines(method="lm", showlegend=FALSE)
+  add_lines(showlegend=FALSE)
 
 subplot(
   Aptenodytes, #adding the three plots together with ","
@@ -118,6 +118,8 @@ subplot(
       title = list(text = "Genus")
     )
   )
+
+
 # couldn't figure out how to make a linear line like geom_smooth
 ```
 The wing length and tail length among the female penguins within the three genus (Aptenodytes, Eudyptes, and Pygoscelis) are represented in @fig-penguins-pretty. 
@@ -148,7 +150,7 @@ The wing length and tail length among the female penguins within the three genus
 #| echo: FALSE
 #| fig-cap: No Idea What's Going on Here
 
-ggplot(data=many_penguins,
+bad_plot<- ggplot(data=many_penguins,
                      aes(x=tail.length,y=wing.length,
                      color=species))+ # species instead of genus makes it much more confusing
    labs(title="Penguins",x="Tail Length (in)",
@@ -173,7 +175,7 @@ ggplot(data=many_penguins,
       size = 20
     )
   )
-
+ggsave(here("Week_8","outputs","bad_plot.png"))
 ```
 
 In @fig-penguins_ugly, we can have a very hard time interpreting what is going on for a number of reasons... This plot seems to compare wing and tail across a number of penguin species. 
