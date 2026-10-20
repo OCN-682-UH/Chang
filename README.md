@@ -20,13 +20,13 @@
   * Data
   * Scripts
   * Outputs
-  * [https://01a11303-56e6-0f91-acb7-4110fc8341c5.share.connect.posit.cloud/](https://01a11d68-ed85-ea26-6dcd-3c4c31c5e193.share.connect.posit.cloud/)
+  * [Week 6 Homework](https://01a11d68-ed85-ea26-6dcd-3c4c31c5e193.share.connect.posit.cloud/)
 * [Week 7]()
   *  Data
   *  Scripts
   *  Outputs
-  *  [https://01a13441-7dc7-f6a8-c579-50cc1d82a1af.share.connect.posit.cloud/](https://01a13441-7dc7-f6a8-c579-50cc1d82a1af.share.connect.posit.cloud/)
-* [Week 8]()
+  *  [Week 7 Homework](https://01a13441-7dc7-f6a8-c579-50cc1d82a1af.share.connect.posit.cloud/)
+* [Week 8](https://github.com/OCN-682-UH/Chang/tree/dd2487f4c85e3fca2f981de5b449703db5bccd10/Week_8)
   * Data
   * Scripts
   * Outputs
