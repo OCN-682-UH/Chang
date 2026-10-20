@@ -53,8 +53,8 @@ glimpse(many_clean)
 
 ## Good Plot
 ```{r}
-#| label: fig-penguins-pretty
-#| echo: FALSE
+#| echo: false
+#| eval: false
 #| fig-cap: Correlation Between Wing and Tail Length in Female Penguins
 
 Aptenodytes<- plot_ly( #plotly creates an interactive plot
@@ -100,7 +100,7 @@ Pygoscelis<-plot_ly(
   layout(title = "Pygoscelis",
          xaxis = list(title = ""),
          yaxis = list(title = ""))|>
-  add_lines(showlegend=FALSE)
+  add_lines(y=~wing.length, showlegend=FALSE)
 
 subplot(
   Aptenodytes, #adding the three plots together with ","
@@ -118,22 +118,37 @@ subplot(
       title = list(text = "Genus")
     )
   )
+```
+
+
+```{r}
+#| label: fig-penguins-pretty
+#| fig-cap: Penguin Wing Length among Genus
+
+good<- ggplot(data=many_penguins,
+       mapping=aes(x=genus,y=wing.length, color=genus))+
+  labs(title="Penguin Wing Length among Genus", x="Genus",y="Wing Length (mm)")+
+  geom_boxplot()+
+  guides(color="none")+
+  theme_bw()
+
+
+ggplotly(good) #converts ggplot to plotly
 
 
 # couldn't figure out how to make a linear line like geom_smooth
 ```
-The wing length and tail length among the female penguins within the three genus (Aptenodytes, Eudyptes, and Pygoscelis) are represented in @fig-penguins-pretty. 
+The wing length among various penguin species within the six genus (Aptenodytes, Eudyptes, Eudyptula, Megadyptes, Pygoscelis, and Sphenicus) are represented in @fig-penguins-pretty. 
 
 ### What's good about this plot?
 
 #### Clarity
 
+* Presents raw data
 * Not too many points, variables, or series
-* Clear legend
+* No legend
 * Simple and organized
-  * Emphasis put on three genus that are in separate plots
-* Legend is clear and legible
-  * Follow a logical order
+  * Emphasis put on the six genus, instead of each species
 * No special symbols or lines
   
 #### Aesthetics
@@ -147,7 +162,6 @@ The wing length and tail length among the female penguins within the three genus
 
 ```{r}
 #| label: fig-penguins_ugly
-#| echo: FALSE
 #| fig-cap: No Idea What's Going on Here
 
 bad_plot<- ggplot(data=many_penguins,
@@ -163,7 +177,7 @@ bad_plot<- ggplot(data=many_penguins,
     element_text(family = "Apple Chancery"), #fabulous font everywhere
     plot.title = element_text(
       family = "Apple Chancery", #had to type this out for each axis, is there an easier way?
-      size = 25,
+      size = 30,
       face = "bold"
     ),
     axis.title = element_text(
@@ -175,6 +189,8 @@ bad_plot<- ggplot(data=many_penguins,
       size = 20
     )
   )
+
+bad_plot
 ggsave(here("Week_8","outputs","bad_plot.png"))
 ```
 
@@ -195,6 +211,6 @@ In @fig-penguins_ugly, we can have a very hard time interpreting what is going o
 * Very cluttered
   * Boxes are too large and close together
 * The coloring is distracting and confusing
-  *Grid color and species colors
+  * Grid color and species colors
 * Distracting and large font
   * Title font and legend font don't match

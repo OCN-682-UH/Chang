@@ -88,12 +88,14 @@ nde_plot <- function(data, x, y, fill) {
 
 #### Example 1
 ```{r}
-nde_plot(nde_experiences, x=gender, y=greyson_score, fill=ai_aliens)
+nde_plot(nde_experiences, x=gender, y=greyson_score, fill=ai_aliens)+
+  labs(x="Gender",y="Greyson Score", fill="AI Aliens")
 
 ```
 
 #### Example 2
 ```{r}
-nde_plot(nde_experiences, x=ai_clinical, y=greyson_score, fill=gender)
+nde_plot(nde_experiences, x=ai_clinical, y=greyson_score, fill=gender)+
+  labs(x="AI Clinical", y="Greyson Score", fill="Gender")
 
 ```
