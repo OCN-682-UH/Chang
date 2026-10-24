@@ -47,6 +47,7 @@ nde_experiences <- readr::read_csv('https://raw.githubusercontent.com/rfordatasc
 ## Create Functions
 
 ### Function 1: Valid Near Death Experience's
+
 #### Greyson Scores that are above the value 7, are considered valid near death experiences
 
 ```{r}
@@ -62,15 +63,19 @@ valid_nde <- function(greyson_score){
 ```
 
 #### Example 1
+
 ```{r}
 valid_nde(10)
 ```
+
 This experience was valid.
 
 #### Example 2
+
 ```{r}
 valid_nde(4)
 ```
+
 This experience was not valid
 
 ### Function 2: Boxplot
@@ -87,6 +92,7 @@ nde_plot <- function(data, x, y, fill) {
 ```
 
 #### Example 1
+
 ```{r}
 nde_plot(nde_experiences, x=gender, y=greyson_score, fill=ai_aliens)+
   labs(x="Gender",y="Greyson Score", fill="AI Aliens")
@@ -94,6 +100,7 @@ nde_plot(nde_experiences, x=gender, y=greyson_score, fill=ai_aliens)+
 ```
 
 #### Example 2
+
 ```{r}
 nde_plot(nde_experiences, x=ai_clinical, y=greyson_score, fill=gender)+
   labs(x="AI Clinical", y="Greyson Score", fill="Gender")

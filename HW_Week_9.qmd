@@ -1,0 +1,31 @@
+---
+title: "Week 9 Homework"
+author: "Jasmine Chang"
+format: html
+editor: visual
+---
+
+## Homework
+
+Working with intertidal data. Your goal is to make a plot where at least one axis is a factor in a meaningful order.
+
+* Data files in the data/ folder: intertidal.csv and intertidal_latitude.csv (plus a data dictionary)
+* You may need to use string-cleaning skills (check out the {janitor} package) to tidy column names
+* If you visualize by tide height, it must go Low → Mid → High on the plot
+* If you visualize by site, it must go in order of latiude (N->S or S->N)
+
+## Loading Libraries
+
+```{r}
+library(tidyverse)
+library(here)
+```
+
+## Calling Data
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).

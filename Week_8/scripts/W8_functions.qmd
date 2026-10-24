@@ -8,22 +8,19 @@ editor: visual
 ## Functional Programming
 
 Load Libraries
+
 ```{r}
 library(tibble)
 library(tidyverse)
 ```
 
-
 ### When do you need a function?
-Use a function when:
-You have a task you want to use more than once
-You want to keep your script clean and organized
-You want to avoid mistakes with copy and paste
-You minimize places where you need to update your code
+
+Use a function when: You have a task you want to use more than once You want to keep your script clean and organized You want to avoid mistakes with copy and paste You minimize places where you need to update your code
 
 ### Example: Rescaling data
-Imagine you want to rescale multiple columns to lie between 0 and 1 using: 𝑥−min(𝑥)max(𝑥)−min(𝑥)
-Set up a dataframe with random numbers:
+
+Imagine you want to rescale multiple columns to lie between 0 and 1 using: 𝑥−min(𝑥)max(𝑥)−min(𝑥) Set up a dataframe with random numbers:
 
 (set.seed) can set it so that you get the exact same number every time.
 
@@ -37,7 +34,6 @@ df <- tibble(
 
 head(df)
 ```
-
 
 ### Without a function: Manual rescaling
 
@@ -63,6 +59,7 @@ df <- df |>
 Writing it out like this gives room for error, this is why functions are better
 
 ## Writing a Function
+
 ### Create a reusable rescaling function
 
 ```{r}
@@ -87,23 +84,20 @@ df |>
   mutate(across(everything(), rescale01))
 #mutates everything without typing any letters
 ```
+
 ### Anatomy of a Function
 
-Every function has four key parts:
-1. Function name — rescale01 describes what it does (rescales to 0-1)
-2. Arguments — function(x) lists the inputs
-  * Multiple arguments: function(x, y, z)
-3. Function body — The { } block containing the code
-4. Return statement — What the function returns
+Every function has four key parts: 1. Function name — rescale01 describes what it does (rescales to 0-1) 2. Arguments — function(x) lists the inputs \* Multiple arguments: function(x, y, z) 3. Function body — The { } block containing the code 4. Return statement — What the function returns
 
 #### Example: Fahrenheit to Celsius
+
 Step 1: The conversion formula
 
 ```{r}
 temp_C <- (temp_F - 32) * 5 / 9
 ```
 
-Type out the functions that you need, for unit conversions or whatever else that you can apply to other codes. 
+Type out the functions that you need, for unit conversions or whatever else that you can apply to other codes.
 
 Step 2: Create the function structure
 
@@ -120,7 +114,8 @@ f_to_celsius <- function() {
   temp_C <- (temp_F - 32) * 5 / 9
 }
 ```
-^^ This isnʻt going to work yet. "Temp_F" is the variable that will change case by case.
+
+This isnʻt going to work yet. "Temp_F" is the variable that will change case by case.
 
 Step 4: Add the argument
 
@@ -146,6 +141,7 @@ f_to_celsius(90)
 ```
 
 ### Practical
+
 #### Celsius to Kelvin
 
 ```{r}
@@ -155,20 +151,15 @@ celsius_to_kelvin <- function(temp_celsius) {
 }
 ```
 
-
 Test it: woohoo!!
+
 ```{r}
 celsius_to_kelvin(15)
 ```
 
 ### Making Plot Functions
 
-Why turn plots into functions?
-If you have a plot format you use repeatedly, create a function to:
-* Write it once, use it many times
-* Maintain consistency across figures
-* Save time and reduce errors
-Let’s create a reusable plot function with the penguin dataset:
+Why turn plots into functions? If you have a plot format you use repeatedly, create a function to: \* Write it once, use it many times \* Maintain consistency across figures \* Save time and reduce errors Let’s create a reusable plot function with the penguin dataset:
 
 ```{r}
 library(palmerpenguins)
@@ -198,6 +189,7 @@ myplot<- function() {
 ```
 
 #### Add Flexible Arguments
+
 make arguments broad so the function works with any data
 
 ```{r}
@@ -220,6 +212,7 @@ myplot(data = penguins, x = body_mass_g, y = bill_length_mm)
 ```
 
 #### Use curly-curly {{}} for column names
+
 The {{}} operator from {rlang} (part of tidyverse) lets us pass column names as arguments:
 
 ```{r}
@@ -247,6 +240,7 @@ myplot(data = penguins, x = body_mass_g, y = flipper_length_mm)
 ```
 
 ### Add Different Arguments
+
 Set defaults so users donʻt have to specify everything
 
 ```{r}
@@ -277,6 +271,7 @@ myplot(x = body_mass_g, y = flipper_length_mm) +
 ### Adding Control Flow with if-else
 
 #### the if-else statement
+
 Use if-else to execute different code based on a condition:
 
 ```{r}
@@ -293,7 +288,9 @@ f
 ```
 
 #### Making your function more flexible
+
 Add an argument to toggle features on/off:
+
 ```{r}
 myplot <- function(data = penguins, x, y, lines = TRUE) { # its automatically on, but can easily turn it off
   pal <- pnw_palette("Lake", 3, type = "discrete")
@@ -326,8 +323,9 @@ myplot(x = body_mass_g, y = flipper_length_mm, lines = FALSE)
 ```
 
 ### Today’s awesome R package: {BRRR}
-Sounds with your favorite rappers!
-For snoop:
+
+Sounds with your favorite rappers! For snoop:
+
 ```{r}
 library(BRRR)
 
@@ -335,7 +333,7 @@ skrrrahh("snoop")
 ```
 
 For biggie
+
 ```{r}
 skrrrahh("biggie")
 ```
-

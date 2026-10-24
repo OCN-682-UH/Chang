@@ -1,0 +1,251 @@
+---
+title: "Week 9: Factors"
+author: "Jasmine Chang"
+format: html
+editor: visual
+---
+
+## Week 9: Factors
+
+Outline
+Working with Factors
+* What is a factor?
+* Factor booby-traps
+* Using {forcats} — the tidyverse package for categorical data
+* Homework using factors
+
+## Load Libraries
+
+```{r}
+library(tidyverse)
+library(here)
+```
+
+## Load Data
+
+
+
+```{r}
+# Option 2: read directly from GitHub
+income_mean <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-02-09/income_mean.csv")
+
+head(income_mean)
+```
+
+## What Is a Factor?
+
+A factor is a specialized version of a character — it is how R truly stores categorical data.
+* The values a factor can take are called levels
+* Levels let you control the order of categories in plots and summaries
+* The default order of levels is always alphabetical
+* Under the hood, R stores factors as integers (1, 2, 3…) mapped to level labels
+
+```{r}
+fruits <- factor(c("Apple", "Grape", "Banana"))
+fruits
+```
+
+## Factor Booby-Traps!
+
+Imagine a column of numbers that has a single typo — R reads the whole thing as characters. If you then convert to numeric, real text becomes NA:
+```{r}
+test <- c("A", "1", "2")
+as.numeric(test)
+```
+Now try converting after converting to a factor first — this is even worse:
+
+```{r}
+test <- factor(test)
+as.numeric(test)    # returns the underlying integer codes, not the original values!
+```
+
+## Reading In Data Safely
+
+Factor booby-traps are why there was a push to stop importing strings as factors automatically 
+
+### Function:
+
+read.csv() - strings becomes factors automatically
+read_csv() - strings stay as characters
+
+## Starwars Data
+
+```{r}
+glimpse(starwars)
+```
+
+How many of each species:
+
+```{r}
+starwars |>
+  filter(!is.na(species)) |>   # remove NAs
+  count(species, sort = TRUE)
+```
+
+^ There are 38 unique species, but most appear only once. Lets lump the rare ones together.
+
+## fct_lump() — Lump Rare Levels Together
+
+fct_lump(x, n) keeps the n most common levels and collapses everything else into
+
+```{r}
+star_counts <- starwars |>
+  filter(!is.na(species)) |>
+  mutate(species = fct_lump(species, n = 3)) |>
+  count(species)
+
+star_counts
+```
+## Reordering Facors
+
+### A Basic Bar Plot
+
+```{r}
+star_counts |>
+  ggplot(aes(x = species, y = n)) +
+  geom_col()
+```
+
+### fct_reorder() — Sort by Another Variable
+
+fct_reorder(f, x) reorders the levels of factor f by the values of x:
+
+```{r}
+star_counts |>
+  ggplot(aes(x = fct_reorder(species, n), y = n)) +
+  geom_col()
+```
+
+### fct_reorder() — Descending Order
+
+Add .desc = TRUE to flip the order:
+
+```{r}
+star_counts |>
+  ggplot(aes(x = fct_reorder(species, n, .desc = TRUE), y = n)) +
+  geom_col() +
+  labs(x = "Species")
+```
+
+## Reordering Line Plot Legends
+
+### The income_mean Data
+
+```{r}
+glimpse(income_mean)
+```
+### Summarize by Year and Quintile
+
+```{r}
+total_income <- income_mean |>
+  group_by(year, income_quintile) |>
+  summarise(income_dollars_sum = sum(income_dollars), .groups = "drop") |>
+  mutate(income_quintile = factor(income_quintile))
+```
+
+### Basic Line Plot - Legend in Wrong Order
+
+```{r}
+total_income |>
+  ggplot(aes(x = year, y = income_dollars_sum,
+             color = income_quintile)) +
+  geom_line()
+```
+
+^ The legend order doesnʻt match the line order - the highest income group is at the bottom of the legend. 
+
+### fct_reorder2() — Reorder by Two Variables
+
+fct_reorder2(f, x, y) reorders f by the values of y at the largest values of x. This aligns the legend with the right end of the lines:
+
+```{r}
+total_income |>
+  ggplot(aes(x = year, y = income_dollars_sum,
+             color = fct_reorder2(income_quintile, year, income_dollars_sum))) +
+  geom_line() +
+  labs(color = "income quintile")
+```
+
+## Setting Levels Manually
+
+Sometimes you need a specific order that isnʻt determined by the data.
+
+### factor() with levels=...
+
+Use the levels argument inside factor() to set the exact order you want:
+
+```{r}
+# Without levels — alphabetical by default
+x1 <- factor(c("Jan", "Mar", "Apr", "Dec"))
+x1
+```
+
+```{r}
+# With levels — your specified order
+x1 <- factor(c("Jan", "Mar", "Apr", "Dec"),
+             levels = c("Jan", "Mar", "Apr", "Dec"))
+x1
+```
+
+## Subsetting Factors
+
+What happens to factor levels when you filter your data?
+
+### Filter to Common Species
+
+Letʻs filter the starwars data to only species with more than three individuals
+
+```{r}
+starwars_clean <- starwars |>
+  filter(!is.na(species)) |>
+  count(species, sort = TRUE) |>
+  mutate(species = factor(species)) |>   # convert to factor
+  filter(n > 3)                          # keep only common species
+
+starwars_clean
+```
+```{r}
+levels(starwars_clean$species)   # check the factor levels
+```
+
+### droplevels() - Remove Unused Levels
+
+droplevels() (base R) or fct_drop() (forcats) removes any levels that no longer appear in the data:
+
+```{r}
+starwars_clean <- starwars |>
+  filter(!is.na(species)) |>
+  count(species, sort = TRUE) |>
+  mutate(species = factor(species)) |>
+  filter(n > 3) |>
+  droplevels()                           # remove unused levels
+```
+
+```{r}
+levels(starwars_clean$species)
+```
+
+### fct_recode() - Rename Levels
+
+fct_recode(f, “new name” = “old name”) renames one or more levels:
+
+```{r}
+starwars_clean <- starwars |>
+  filter(!is.na(species)) |>
+  count(species, sort = TRUE) |>
+  mutate(species = factor(species)) |>
+  filter(n > 3) |>
+  droplevels() |>
+  mutate(species = fct_recode(species, "Humanoid" = "Human"))
+
+starwars_clean
+```
+
+## Other helpful forcats functions
+
+fct_relevel() - move specific levels to the front
+fct_rev() - reverse the order of levels
+fct_collapse() - collapse multiple levels into one
+fct_na_value_to_level() - convert na into an explicit level
+fct_infreq() - order levels by frequency
+
