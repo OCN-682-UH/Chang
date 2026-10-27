@@ -42,7 +42,7 @@ A factor is a specialized version of a character — it is how R truly stores ca
 
 ```{r}
 fruits <- factor(c("Apple", "Grape", "Banana"))
-fruits
+fruits #organizes them alphabetically
 ```
 
 ## Factor Booby-Traps!
@@ -66,7 +66,7 @@ Factor booby-traps are why there was a push to stop importing strings as factors
 ### Function:
 
 read.csv() - strings becomes factors automatically
-read_csv() - strings stay as characters
+read_csv() - strings stay as characters ***use this one***
 
 ## Starwars Data
 
@@ -77,7 +77,7 @@ glimpse(starwars)
 How many of each species:
 
 ```{r}
-starwars |>
+starwars_clean |>
   filter(!is.na(species)) |>   # remove NAs
   count(species, sort = TRUE)
 ```
@@ -103,7 +103,7 @@ star_counts
 ```{r}
 star_counts |>
   ggplot(aes(x = species, y = n)) +
-  geom_col()
+  geom_col() # what is this?
 ```
 
 ### fct_reorder() — Sort by Another Variable

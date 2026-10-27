@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jasmine Chang">
+
+<title>Week 9 Homework</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="HW_Week_9_files/libs/clipboard/clipboard.min.js"></script>
+<script src="HW_Week_9_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="HW_Week_9_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="HW_Week_9_files/libs/quarto-html/popper.min.js"></script>
+<script src="HW_Week_9_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="HW_Week_9_files/libs/quarto-html/anchor.min.js"></script>
+<link href="HW_Week_9_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="HW_Week_9_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="HW_Week_9_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="HW_Week_9_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="HW_Week_9_files/libs/bootstrap/bootstrap-c2e55264ed47ce3b2e0326a2269f9400.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="HW_Week_9_files/libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="HW_Week_9_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="HW_Week_9_files/libs/plotly-binding-4.12.1/plotly.js"></script>
+<script src="HW_Week_9_files/libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="HW_Week_9_files/libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="HW_Week_9_files/libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="HW_Week_9_files/libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link href="HW_Week_9_files/libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="HW_Week_9_files/libs/plotly-main-2.25.2/plotly-latest.min.js"></script>
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of Contents</h2>
+   
+  <ul>
+  <li><a href="#homework" id="toc-homework" class="nav-link active" data-scroll-target="#homework">Homework</a></li>
+  <li><a href="#loading-libraries" id="toc-loading-libraries" class="nav-link" data-scroll-target="#loading-libraries">Loading Libraries</a></li>
+  <li><a href="#calling-data" id="toc-calling-data" class="nav-link" data-scroll-target="#calling-data">Calling Data</a>
+  <ul>
+  <li><a href="#intertidal" id="toc-intertidal" class="nav-link" data-scroll-target="#intertidal">Intertidal</a></li>
+  <li><a href="#intertidal-latitude" id="toc-intertidal-latitude" class="nav-link" data-scroll-target="#intertidal-latitude">Intertidal Latitude</a></li>
+  </ul></li>
+  <li><a href="#clean-data" id="toc-clean-data" class="nav-link" data-scroll-target="#clean-data">Clean Data</a>
+  <ul>
+  <li><a href="#looking-at-quadrat-data-only-from-low-tide" id="toc-looking-at-quadrat-data-only-from-low-tide" class="nav-link" data-scroll-target="#looking-at-quadrat-data-only-from-low-tide">Looking at quadrat data only from low tide</a></li>
+  <li><a href="#combine-data" id="toc-combine-data" class="nav-link" data-scroll-target="#combine-data">Combine Data</a></li>
+  </ul></li>
+  <li><a href="#data-visualization" id="toc-data-visualization" class="nav-link" data-scroll-target="#data-visualization">Data visualization</a></li>
+  <li><a href="#applying-factor" id="toc-applying-factor" class="nav-link" data-scroll-target="#applying-factor">Applying Factor</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Week 9 Homework</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jasmine Chang </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="homework" class="level2">
+<h2 class="anchored" data-anchor-id="homework">Homework</h2>
+<p>Working with intertidal data. Your goal is to make a plot where at least one axis is a factor in a meaningful order.</p>
+<ul>
+<li>Data files in the data/ folder: intertidal.csv and intertidal_latitude.csv (plus a data dictionary)</li>
+<li>You may need to use string-cleaning skills (check out the {janitor} package) to tidy column names</li>
+<li>If you visualize by tide height, it must go Low → Mid → High on the plot</li>
+<li>If you visualize by site, it must go in order of latiude (N-&gt;S or S-&gt;N)</li>
+</ul>
+</section>
+<section id="loading-libraries" class="level2">
+<h2 class="anchored" data-anchor-id="loading-libraries">Loading Libraries</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="calling-data" class="level2">
+<h2 class="anchored" data-anchor-id="calling-data">Calling Data</h2>
+<section id="intertidal" class="level3">
+<h3 class="anchored" data-anchor-id="intertidal">Intertidal</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>intertidal<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"Week_9"</span>, <span class="st">"data"</span>, <span class="st">"intertidaldata.csv"</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(intertidal)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 450
+Columns: 13
+$ Site                  &lt;chr&gt; "Scripps", "Scripps", "Scripps", "Scripps", "Scr…
+$ Transect              &lt;dbl&gt; 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, …
+$ Quadrat               &lt;chr&gt; "Low  .", "Mid", "High", "Low", "Mid", "High", "…
+$ `Bare Rock`           &lt;dbl&gt; 25, 50, 20, 10, 40, 40, 0, 30, 60, 0, 45, 70, 5,…
+$ Algae                 &lt;dbl&gt; 75, 0, 50, 85, 5, 5, 100, 5, 4, 100, 10, 0, 70, …
+$ Mussels               &lt;dbl&gt; 0, 5, 1, 0, 10, 0, 0, 10, 1, 0, 3, 0, 0, 5, 0, 0…
+$ `Small Barnacles`     &lt;dbl&gt; 2, 50, 50, 0, 40, 55, 0, 40, 20, 0, 25, 25, 20, …
+$ `Large Barnacles`     &lt;dbl&gt; 5, 5, 0, 0, 1, 0, 1, 0, 0, 0, 15, 5, 5, 0, 0, 5,…
+$ `Gooseneck Barnacles` &lt;dbl&gt; 0, 0, 0, 5, 5, 0, 0, 30, 5, 0, 0, 0, 0, 0, 0, 0,…
+$ Anemone               &lt;dbl&gt; 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 10, 0, 0,…
+$ `Whelks (Counts)`     &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, …
+$ `Crabs (Counts)`      &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+$ `Stars (Counts)`      &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …</code></pre>
+</div>
+</div>
+</section>
+<section id="intertidal-latitude" class="level3">
+<h3 class="anchored" data-anchor-id="intertidal-latitude">Intertidal Latitude</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>intertidallat<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"Week_9"</span>, <span class="st">"data"</span>, <span class="st">"intertidaldata_latitude.csv"</span>))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(intertidallat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 15
+Columns: 2
+$ Site     &lt;chr&gt; "Starfish Point", "Cape Meares", "Fogarty Creek", "Cape Arago…
+$ Latitude &lt;dbl&gt; 47.65110, 45.47201, 44.83672, 43.30366, 41.99113, 41.78296, 3…</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="clean-data" class="level2">
+<h2 class="anchored" data-anchor-id="clean-data">Clean Data</h2>
+<section id="looking-at-quadrat-data-only-from-low-tide" class="level3">
+<h3 class="anchored" data-anchor-id="looking-at-quadrat-data-only-from-low-tide">Looking at quadrat data only from low tide</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>intertidal_low<span class="ot">&lt;-</span> intertidal <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Quadrat<span class="sc">==</span><span class="st">"Low"</span>) <span class="co"># only look at quardats collected at low tide</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>intertidal_low</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 149 × 13
+   Site       Transect Quadrat `Bare Rock` Algae Mussels `Small Barnacles`
+   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;             &lt;dbl&gt;
+ 1 Scripps           2 Low              10    85       0                 0
+ 2 Scripps           3 Low               0   100       0                 0
+ 3 Scripps           4 Low               0   100       0                 0
+ 4 Scripps           5 Low               5    70       0                20
+ 5 Scripps           6 Low               5    85       0                 5
+ 6 Scripps           7 Low              20    70       2                 3
+ 7 Scripps           8 Low               5    95       0                 0
+ 8 Scripps           9 Low              10    65       0                 3
+ 9 Scripps          10 Low              30    45       0                10
+10 Dana Point        1 Low               0   100       0                 0
+# ℹ 139 more rows
+# ℹ 6 more variables: `Large Barnacles` &lt;dbl&gt;, `Gooseneck Barnacles` &lt;dbl&gt;,
+#   Anemone &lt;dbl&gt;, `Whelks (Counts)` &lt;dbl&gt;, `Crabs (Counts)` &lt;dbl&gt;,
+#   `Stars (Counts)` &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="combine-data" class="level3">
+<h3 class="anchored" data-anchor-id="combine-data">Combine Data</h3>
+<p>Also adding the correlating coordinates to the sites from intertidal lat data set.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>intertidallat_low<span class="ot">&lt;-</span> intertidal_low<span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(intertidallat, <span class="at">by=</span><span class="st">"Site"</span>)<span class="co"># combining latitude data, adding a column in intertidal_low</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>intertidallat_low</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 149 × 14
+   Site       Transect Quadrat `Bare Rock` Algae Mussels `Small Barnacles`
+   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;             &lt;dbl&gt;
+ 1 Scripps           2 Low              10    85       0                 0
+ 2 Scripps           3 Low               0   100       0                 0
+ 3 Scripps           4 Low               0   100       0                 0
+ 4 Scripps           5 Low               5    70       0                20
+ 5 Scripps           6 Low               5    85       0                 5
+ 6 Scripps           7 Low              20    70       2                 3
+ 7 Scripps           8 Low               5    95       0                 0
+ 8 Scripps           9 Low              10    65       0                 3
+ 9 Scripps          10 Low              30    45       0                10
+10 Dana Point        1 Low               0   100       0                 0
+# ℹ 139 more rows
+# ℹ 7 more variables: `Large Barnacles` &lt;dbl&gt;, `Gooseneck Barnacles` &lt;dbl&gt;,
+#   Anemone &lt;dbl&gt;, `Whelks (Counts)` &lt;dbl&gt;, `Crabs (Counts)` &lt;dbl&gt;,
+#   `Stars (Counts)` &lt;dbl&gt;, Latitude &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="data-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="data-visualization">Data visualization</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(intertidallat_low, <span class="fu">aes</span>(<span class="at">x=</span>Site, <span class="at">y=</span>Algae, <span class="at">color=</span>Site))<span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>()<span class="sc">+</span> <span class="co"># good visualization of all the data points</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Algae at Low Tide"</span>, <span class="at">x=</span><span class="st">"Location"</span>, <span class="at">y=</span><span class="st">"Algae"</span>)<span class="sc">+</span> </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_blank</span>()) <span class="co"># get rid of all crazy x labels</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="HW_Week_9_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="applying-factor" class="level2">
+<h2 class="anchored" data-anchor-id="applying-factor">Applying Factor</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>algae_low<span class="ot">&lt;-</span> <span class="fu">ggplot</span>(intertidallat_low, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">fct_reorder</span>(Site, Latitude, <span class="at">.desc=</span><span class="cn">TRUE</span>), <span class="at">y=</span>Algae, <span class="at">color=</span>Site))<span class="sc">+</span> <span class="co"># fct_reorder puts the sites in order of latitude, .desc = TRUE I found online; puts them in descending order, resulting in N-&gt;S</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>()<span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Algal Cover at Low Tide"</span>, <span class="at">x=</span><span class="st">"Latitude (North to South)"</span>, <span class="at">y=</span><span class="st">"Algae"</span>)<span class="sc">+</span> </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),<span class="co"># get rid of all crazy x labels</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position=</span><span class="st">"none"</span>) <span class="co"># also get rid of the busy legend</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(algae_low) <span class="co"># make it a plotly so you can still see coordinates and site name</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-9c86a49c447f55e1221e" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-9c86a49c447f55e1221e">{"x":{"data":[{"x":[7,7,7,7,7,7,7,7,7,7],"y":[100,100,100,100,100,100,100,100,85,100],"hoverinfo":"y","type":"box","fillcolor":"rgba(255,255,255,1)","marker":{"opacity":null,"outliercolor":"rgba(0,0,0,1)","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"},"size":5.6692913385826778},"line":{"color":"rgba(248,118,109,1)","width":1.8897637795275593},"name":"Bodega","legendgroup":"Bodega","showlegend":true,"xaxis":"x","yaxis":"y","frame":null},{"x":[8,8,8,8,8,8,8,8,8,8],"y":[95,90,95,70,80,60,100,100,85,95],"hoverinfo":"y","type":"box","fillcolor":"rgba(255,255,255,1)","marker":{"opacity":null,"outliercolor":"rgba(0,0,0,1)","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"},"size":5.6692913385826778},"line":{"color":"rgba(229,135,0,1)","width":1.8897637795275593},"name":"Cambria","legendgroup":"Cambria","showlegend":true,"xaxis":"x","yaxis":"y","frame":null},{"x":[4,4,4,4,4,4,4,4,4,4],"y":[70,70,10,10,75,60,80,70,60,40],"hoverinfo":"y","type":"box","fillcolor":"rgba(255,255,255,1)","marker":{"opacity":null,"outliercolor":"rgba(0,0,0,1)","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"},"size":5.6692913385826778},"line":{"color":"rgba(201,152,0,1)","width":1.8897637795275593},"name":"Cape Arago","legendgroup":"Cape Arago","showlegend":true,"xaxis":"x","yaxis":"y","frame":null},{"x":[2,2,2,2,2,2,2,2,2,2],"y":[0,0,0,5,0,5,10,0,0,0],"hoverinfo":"y","type":"box","fillcolor":"rgba(255,255,255,1)","marker":{"opacity":null,"outliercolor":"rgba(0,0,0,1)","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"},"size":5.6692913385826778},"line":{"color":"rgba(163,165,0,1)","width":1.8897637795275593},"name":"Cape Meares","legendgroup":"Cape Meares","showlegend":true,"xaxis":"x","yaxis":"y","frame":null},{"x":[11,11,11,11,11,11,11,11,11,11],"y":[50,60,60,75,1,0,0,10,15,2],"hoverinfo":"y","type":"box","fillcolor":"rgba(255,255,255,1)","marker":{"opacity":null,"outliercolor":"rgba(0,0,0,1)","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"},"size":5.6692913385826778},"line":{"color":"rgba(107,177,0,1)","width":1.8897637795275593},"name":"Carpenteria","legendgroup":"Carpenteria","showlegend":true,"xaxis":"x","yaxis":"y","frame":null},{"x":[13,13,13,13,13,13,13,13,13,13],"y":[100,80,80,80,45,80,80,70,60,85],"hoverinfo":"y","type":"box","fillcolor":"rgba(255,255,255,1)","marker":{"opacity":null,"outliercolor":"rgba(0,0,0,1)","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"},"size":5.6692913385826778},"line":{"color":"rgba(0,186,56,1)","width":1.8897637795275593},"name":"Crystal Cove","legendgroup":"Crystal Cove","showlegend":true,"xaxis":"x","yaxis":"y","frame":null},{"x":[14,14,14,14,14,14,14,14,14,14],"y":[100,95,75,95,100,95,90,95,100,95],"hoverinfo":"y","type":"box","fillcolor":"rgba(255,255,255,1)","marker":{"opacity":null,"outliercolor":"rgba(0,0,0,1)","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"},"size":5.6692913385826778},"line":{"color":"rgba(0,191,125,1)","width":1.8897637795275593},"name":"Dana Point","legendgroup":"Dana Point","showlegend":true,"xaxis":"x","yaxis":"y","frame":null},{"x":[3,3,3,3,3,3,3,3,3,3],"y":[90,95,70,100,100,100,100,100,100,100],"hoverinfo":"y","type":"box","fillcolor":"rgba(255,255,255,1)","marker":{"opacity":null,"outliercolor":"rgba(0,0,0,1)","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"},"size":5.6692913385826778},"line":{"color":"rgba(0,192,175,1)","width":1.8897637795275593},"name":"Fogarty Creek","legendgroup":"Fogarty Creek","showlegend":true,"xaxis":"x","yaxis":"y","frame":null},{"x":[9,9,9,9,9,9,9,9,9,9],"y":[70,96,93,90,80,80,65,60,70,90],"hoverinfo":"y","type":"box","fillcolor":"rgba(255,255,255,1)","marker":{"opacity":null,"outliercolor":"rgba(0,0,0,1)","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"},"size":5.6692913385826778},"line":{"color":"rgba(0,188,216,1)","width":1.8897637795275593},"name":"Hazards","legendgroup":"Hazards","showlegend":true,"xaxis":"x","yaxis":"y","frame":null},{"x":[12,12,12,12,12,12,12,12,12,12],"y":[100,80,100,75,80,98,95,70,85,95],"hoverinfo":"y","type":"box","fillcolor":"rgba(255,255,255,1)","marker":{"opacity":null,"outliercolor":"rgba(0,0,0,1)","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"},"size":5.6692913385826778},"line":{"color":"rgba(0,176,246,1)","width":1.8897637795275593},"name":"Little Corona","legendgroup":"Little Corona","showlegend":true,"xaxis":"x","yaxis":"y","frame":null},{"x":[6,6,6,6,6,6,6,6,6,6],"y":[85,70,60,100,90,95,100,90,95,50],"hoverinfo":"y","type":"box","fillcolor":"rgba(255,255,255,1)","marker":{"opacity":null,"outliercolor":"rgba(0,0,0,1)","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"},"size":5.6692913385826778},"line":{"color":"rgba(97,156,255,1)","width":1.8897637795275593},"name":"Point St. George","legendgroup":"Point St. George","showlegend":true,"xaxis":"x","yaxis":"y","frame":null},{"x":[5,5,5,5,5,5,5,5,5,5],"y":[10,5,0,0,0,1,0,0,0,0],"hoverinfo":"y","type":"box","fillcolor":"rgba(255,255,255,1)","marker":{"opacity":null,"outliercolor":"rgba(0,0,0,1)","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"},"size":5.6692913385826778},"line":{"color":"rgba(185,131,255,1)","width":1.8897637795275593},"name":"Pyramid Point","legendgroup":"Pyramid Point","showlegend":true,"xaxis":"x","yaxis":"y","frame":null},{"x":[15,15,15,15,15,15,15,15,15],"y":[85,100,100,70,85,70,95,65,45],"hoverinfo":"y","type":"box","fillcolor":"rgba(255,255,255,1)","marker":{"opacity":null,"outliercolor":"rgba(0,0,0,1)","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"},"size":5.6692913385826778},"line":{"color":"rgba(231,107,243,1)","width":1.8897637795275593},"name":"Scripps","legendgroup":"Scripps","showlegend":true,"xaxis":"x","yaxis":"y","frame":null},{"x":[10,10,10,10,10,10,10,10,10,10],"y":[80,35,70,20,30,25,30,20,80,90],"hoverinfo":"y","type":"box","fillcolor":"rgba(255,255,255,1)","marker":{"opacity":null,"outliercolor":"rgba(0,0,0,1)","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"},"size":5.6692913385826778},"line":{"color":"rgba(253,97,209,1)","width":1.8897637795275593},"name":"Shell Beach","legendgroup":"Shell Beach","showlegend":true,"xaxis":"x","yaxis":"y","frame":null},{"x":[1,1,1,1,1,1,1,1,1,1],"y":[90,40,80,70,50,25,40,75,35,0],"hoverinfo":"y","type":"box","fillcolor":"rgba(255,255,255,1)","marker":{"opacity":null,"outliercolor":"rgba(0,0,0,1)","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"},"size":5.6692913385826778},"line":{"color":"rgba(255,103,164,1)","width":1.8897637795275593},"name":"Starfish Point","legendgroup":"Starfish Point","showlegend":true,"xaxis":"x","yaxis":"y","frame":null},{"x":[6.953443177230656,7.3589739954099063,7.028203881718218,6.6345947612076994,6.7354170914739369,6.8467350071296096,6.6815521316602826,6.8463392080739141,6.9727195337414738,6.7245049450546501],"y":[100.34199435357004,100.01111760139466,100.13603806085885,99.736751954257485,100.04347585123033,99.690459901280704,100.25149750895798,100.05183618534356,85.383688694611195,100.00555804613978],"text":["fct_reorder(Site, Latitude, .desc = TRUE): Bodega<br />Algae: 100<br />Site: Bodega","fct_reorder(Site, Latitude, .desc = TRUE): Bodega<br />Algae: 100<br />Site: Bodega","fct_reorder(Site, Latitude, .desc = TRUE): Bodega<br />Algae: 100<br />Site: Bodega","fct_reorder(Site, Latitude, .desc = TRUE): Bodega<br />Algae: 100<br />Site: Bodega","fct_reorder(Site, Latitude, .desc = TRUE): Bodega<br />Algae: 100<br />Site: Bodega","fct_reorder(Site, Latitude, .desc = TRUE): Bodega<br />Algae: 100<br />Site: Bodega","fct_reorder(Site, Latitude, .desc = TRUE): Bodega<br />Algae: 100<br />Site: Bodega","fct_reorder(Site, Latitude, .desc = TRUE): Bodega<br />Algae: 100<br />Site: Bodega","fct_reorder(Site, Latitude, .desc = TRUE): Bodega<br />Algae:  85<br />Site: Bodega","fct_reorder(Site, Latitude, .desc = TRUE): Bodega<br />Algae: 100<br />Site: Bodega"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"Bodega","legendgroup":"Bodega","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[7.9804126353934404,8.006677633151412,7.954984899610281,8.0603843105956905,8.3278874628245827,8.3353503320366151,8.3478650124743581,8.0017494676634673,8.2591525368392471,8.2457680907100439],"y":[94.829533334635201,89.747663730382925,95.208940706215799,69.684629282541579,80.269177938811481,60.016447244584562,100.12290949132293,99.642131070420149,84.827518254518509,95.332464781776068],"text":["fct_reorder(Site, Latitude, .desc = TRUE): Cambria<br />Algae:  95<br />Site: Cambria","fct_reorder(Site, Latitude, .desc = TRUE): Cambria<br />Algae:  90<br />Site: Cambria","fct_reorder(Site, Latitude, .desc = TRUE): Cambria<br />Algae:  95<br />Site: Cambria","fct_reorder(Site, Latitude, .desc = TRUE): Cambria<br />Algae:  70<br />Site: Cambria","fct_reorder(Site, Latitude, .desc = TRUE): Cambria<br />Algae:  80<br />Site: Cambria","fct_reorder(Site, Latitude, .desc = TRUE): Cambria<br />Algae:  60<br />Site: Cambria","fct_reorder(Site, Latitude, .desc = TRUE): Cambria<br />Algae: 100<br />Site: Cambria","fct_reorder(Site, Latitude, .desc = TRUE): Cambria<br />Algae: 100<br />Site: Cambria","fct_reorder(Site, Latitude, .desc = TRUE): Cambria<br />Algae:  85<br />Site: Cambria","fct_reorder(Site, Latitude, .desc = TRUE): Cambria<br />Algae:  95<br />Site: Cambria"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(229,135,0,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(229,135,0,1)"}},"hoveron":"points","name":"Cambria","legendgroup":"Cambria","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[4.1914284294471145,3.8613295532763003,4.0780406052246692,4.2623414527624846,3.9090463204309343,4.3192087972536681,3.7625545766204596,3.6725210865959523,3.9649074440822005,4.1036793868988752],"y":[69.759119970537725,69.709939738176757,10.396082133799791,9.9446874191984538,74.617708120122558,59.959464385360477,79.848723845183855,70.199000065401194,60.370933826640247,40.154214316979051],"text":["fct_reorder(Site, Latitude, .desc = TRUE): Cape Arago<br />Algae:  70<br />Site: Cape Arago","fct_reorder(Site, Latitude, .desc = TRUE): Cape Arago<br />Algae:  70<br />Site: Cape Arago","fct_reorder(Site, Latitude, .desc = TRUE): Cape Arago<br />Algae:  10<br />Site: Cape Arago","fct_reorder(Site, Latitude, .desc = TRUE): Cape Arago<br />Algae:  10<br />Site: Cape Arago","fct_reorder(Site, Latitude, .desc = TRUE): Cape Arago<br />Algae:  75<br />Site: Cape Arago","fct_reorder(Site, Latitude, .desc = TRUE): Cape Arago<br />Algae:  60<br />Site: Cape Arago","fct_reorder(Site, Latitude, .desc = TRUE): Cape Arago<br />Algae:  80<br />Site: Cape Arago","fct_reorder(Site, Latitude, .desc = TRUE): Cape Arago<br />Algae:  70<br />Site: Cape Arago","fct_reorder(Site, Latitude, .desc = TRUE): Cape Arago<br />Algae:  60<br />Site: Cape Arago","fct_reorder(Site, Latitude, .desc = TRUE): Cape Arago<br />Algae:  40<br />Site: Cape Arago"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(201,152,0,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(201,152,0,1)"}},"hoveron":"points","name":"Cape Arago","legendgroup":"Cape Arago","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1.9538991246372461,1.9543666243553162,1.9899175317957998,1.8421507008373736,2.0939468579366802,1.6075380980968474,2.299796588346362,1.9957929093390703,1.7941410310566426,2.1221661582589149],"y":[-0.34032773822546009,0.3837986784055829,0.051632576622068882,4.8870078217238184,0.014974241331219674,5.3392070256173607,10.364491104334594,0.26858662124723198,-0.19930443912744522,-0.3915285259485245],"text":["fct_reorder(Site, Latitude, .desc = TRUE): Cape Meares<br />Algae:   0<br />Site: Cape Meares","fct_reorder(Site, Latitude, .desc = TRUE): Cape Meares<br />Algae:   0<br />Site: Cape Meares","fct_reorder(Site, Latitude, .desc = TRUE): Cape Meares<br />Algae:   0<br />Site: Cape Meares","fct_reorder(Site, Latitude, .desc = TRUE): Cape Meares<br />Algae:   5<br />Site: Cape Meares","fct_reorder(Site, Latitude, .desc = TRUE): Cape Meares<br />Algae:   0<br />Site: Cape Meares","fct_reorder(Site, Latitude, .desc = TRUE): Cape Meares<br />Algae:   5<br />Site: Cape Meares","fct_reorder(Site, Latitude, .desc = TRUE): Cape Meares<br />Algae:  10<br />Site: Cape Meares","fct_reorder(Site, Latitude, .desc = TRUE): Cape Meares<br />Algae:   0<br />Site: Cape Meares","fct_reorder(Site, Latitude, .desc = TRUE): Cape Meares<br />Algae:   0<br />Site: Cape Meares","fct_reorder(Site, Latitude, .desc = TRUE): Cape Meares<br />Algae:   0<br />Site: Cape Meares"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(163,165,0,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(163,165,0,1)"}},"hoveron":"points","name":"Cape Meares","legendgroup":"Cape Meares","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[11.009111442230642,11.025559560023249,11.363976977206766,10.87067056261003,10.938331367634238,10.780046206340193,10.893325827270747,10.90344902575016,10.632283624634146,11.315592362917959],"y":[49.627648553811014,60.336715779453513,60.201685248501597,75.112993122451002,1.3836176875978707,-0.18807805106043818,0.29133492130786182,10.044301474094391,15.178853684850036,2.2569109251722694],"text":["fct_reorder(Site, Latitude, .desc = TRUE): Carpenteria<br />Algae:  50<br />Site: Carpenteria","fct_reorder(Site, Latitude, .desc = TRUE): Carpenteria<br />Algae:  60<br />Site: Carpenteria","fct_reorder(Site, Latitude, .desc = TRUE): Carpenteria<br />Algae:  60<br />Site: Carpenteria","fct_reorder(Site, Latitude, .desc = TRUE): Carpenteria<br />Algae:  75<br />Site: Carpenteria","fct_reorder(Site, Latitude, .desc = TRUE): Carpenteria<br />Algae:   1<br />Site: Carpenteria","fct_reorder(Site, Latitude, .desc = TRUE): Carpenteria<br />Algae:   0<br />Site: Carpenteria","fct_reorder(Site, Latitude, .desc = TRUE): Carpenteria<br />Algae:   0<br />Site: Carpenteria","fct_reorder(Site, Latitude, .desc = TRUE): Carpenteria<br />Algae:  10<br />Site: Carpenteria","fct_reorder(Site, Latitude, .desc = TRUE): Carpenteria<br />Algae:  15<br />Site: Carpenteria","fct_reorder(Site, Latitude, .desc = TRUE): Carpenteria<br />Algae:   2<br />Site: Carpenteria"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(107,177,0,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(107,177,0,1)"}},"hoveron":"points","name":"Carpenteria","legendgroup":"Carpenteria","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[13.301981069333852,12.910558499954641,12.761363255791366,12.65621676556766,13.050092640332878,13.367449611984194,13.177611015737057,12.954378638044,13.183091097511351,12.850477835722268],"y":[100.36010575126856,80.183191161416474,79.719993062876171,80.03240793123841,44.819924836233255,79.741938779875639,79.863769146241253,70.250566197186714,59.674420519359408,84.995111310668293],"text":["fct_reorder(Site, Latitude, .desc = TRUE): Crystal Cove<br />Algae: 100<br />Site: Crystal Cove","fct_reorder(Site, Latitude, .desc = TRUE): Crystal Cove<br />Algae:  80<br />Site: Crystal Cove","fct_reorder(Site, Latitude, .desc = TRUE): Crystal Cove<br />Algae:  80<br />Site: Crystal Cove","fct_reorder(Site, Latitude, .desc = TRUE): Crystal Cove<br />Algae:  80<br />Site: Crystal Cove","fct_reorder(Site, Latitude, .desc = TRUE): Crystal Cove<br />Algae:  45<br />Site: Crystal Cove","fct_reorder(Site, Latitude, .desc = TRUE): Crystal Cove<br />Algae:  80<br />Site: Crystal Cove","fct_reorder(Site, Latitude, .desc = TRUE): Crystal Cove<br />Algae:  80<br />Site: Crystal Cove","fct_reorder(Site, Latitude, .desc = TRUE): Crystal Cove<br />Algae:  70<br />Site: Crystal Cove","fct_reorder(Site, Latitude, .desc = TRUE): Crystal Cove<br />Algae:  60<br />Site: Crystal Cove","fct_reorder(Site, Latitude, .desc = TRUE): Crystal Cove<br />Algae:  85<br />Site: Crystal Cove"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"Crystal Cove","legendgroup":"Crystal Cove","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[13.644007381610573,13.872614419646562,14.097569036111235,13.965434744954109,14.075092625059188,14.279306692816316,13.679279107972979,13.693756835721434,14.19400912001729,14.05788666009903],"y":[99.67122258245945,94.96305235568434,74.880076558329165,95.273696443811062,100.22552835065872,95.29107062257826,89.920863253436977,95.051816453598434,99.740134331025189,94.66715256813913],"text":["fct_reorder(Site, Latitude, .desc = TRUE): Dana Point<br />Algae: 100<br />Site: Dana Point","fct_reorder(Site, Latitude, .desc = TRUE): Dana Point<br />Algae:  95<br />Site: Dana Point","fct_reorder(Site, Latitude, .desc = TRUE): Dana Point<br />Algae:  75<br />Site: Dana Point","fct_reorder(Site, Latitude, .desc = TRUE): Dana Point<br />Algae:  95<br />Site: Dana Point","fct_reorder(Site, Latitude, .desc = TRUE): Dana Point<br />Algae: 100<br />Site: Dana Point","fct_reorder(Site, Latitude, .desc = TRUE): Dana Point<br />Algae:  95<br />Site: Dana Point","fct_reorder(Site, Latitude, .desc = TRUE): Dana Point<br />Algae:  90<br />Site: Dana Point","fct_reorder(Site, Latitude, .desc = TRUE): Dana Point<br />Algae:  95<br />Site: Dana Point","fct_reorder(Site, Latitude, .desc = TRUE): Dana Point<br />Algae: 100<br />Site: Dana Point","fct_reorder(Site, Latitude, .desc = TRUE): Dana Point<br />Algae:  95<br />Site: Dana Point"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,125,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,191,125,1)"}},"hoveron":"points","name":"Dana Point","legendgroup":"Dana Point","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2.9394775563850999,2.744783779233694,3.2014377433806658,2.758190014027059,3.3998040536418559,2.7618056666105986,3.0183074329048396,2.6754847064614298,2.7502561716362832,3.2616618277505038],"y":[89.705541797541088,95.394837207533413,69.626080671884125,99.703454411774871,100.22205843571574,100.36069781351834,100.09985562041402,99.94714476577937,100.15407016593963,100.23658313751221],"text":["fct_reorder(Site, Latitude, .desc = TRUE): Fogarty Creek<br />Algae:  90<br />Site: Fogarty Creek","fct_reorder(Site, Latitude, .desc = TRUE): Fogarty Creek<br />Algae:  95<br />Site: Fogarty Creek","fct_reorder(Site, Latitude, .desc = TRUE): Fogarty Creek<br />Algae:  70<br />Site: Fogarty Creek","fct_reorder(Site, Latitude, .desc = TRUE): Fogarty Creek<br />Algae: 100<br />Site: Fogarty Creek","fct_reorder(Site, Latitude, .desc = TRUE): Fogarty Creek<br />Algae: 100<br />Site: Fogarty Creek","fct_reorder(Site, Latitude, .desc = TRUE): Fogarty Creek<br />Algae: 100<br />Site: Fogarty Creek","fct_reorder(Site, Latitude, .desc = TRUE): Fogarty Creek<br />Algae: 100<br />Site: Fogarty Creek","fct_reorder(Site, Latitude, .desc = TRUE): Fogarty Creek<br />Algae: 100<br />Site: Fogarty Creek","fct_reorder(Site, Latitude, .desc = TRUE): Fogarty Creek<br />Algae: 100<br />Site: Fogarty Creek","fct_reorder(Site, Latitude, .desc = TRUE): Fogarty Creek<br />Algae: 100<br />Site: Fogarty Creek"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,192,175,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,192,175,1)"}},"hoveron":"points","name":"Fogarty Creek","legendgroup":"Fogarty Creek","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[8.9209783187136047,8.748474849760532,9.2485693277791139,9.2858522474765781,9.2168248249217868,9.1449020272120833,9.2258857829496268,9.1904472803696997,8.6283125266432759,8.8799361882731311],"y":[70.102661975845692,95.602646129392085,93.194309547916049,89.682141315005723,80.063769243843851,80.394415940158069,65.300737083889544,59.656664099730548,70.109067700989542,90.15254209861159],"text":["fct_reorder(Site, Latitude, .desc = TRUE): Hazards<br />Algae:  70<br />Site: Hazards","fct_reorder(Site, Latitude, .desc = TRUE): Hazards<br />Algae:  96<br />Site: Hazards","fct_reorder(Site, Latitude, .desc = TRUE): Hazards<br />Algae:  93<br />Site: Hazards","fct_reorder(Site, Latitude, .desc = TRUE): Hazards<br />Algae:  90<br />Site: Hazards","fct_reorder(Site, Latitude, .desc = TRUE): Hazards<br />Algae:  80<br />Site: Hazards","fct_reorder(Site, Latitude, .desc = TRUE): Hazards<br />Algae:  80<br />Site: Hazards","fct_reorder(Site, Latitude, .desc = TRUE): Hazards<br />Algae:  65<br />Site: Hazards","fct_reorder(Site, Latitude, .desc = TRUE): Hazards<br />Algae:  60<br />Site: Hazards","fct_reorder(Site, Latitude, .desc = TRUE): Hazards<br />Algae:  70<br />Site: Hazards","fct_reorder(Site, Latitude, .desc = TRUE): Hazards<br />Algae:  90<br />Site: Hazards"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,188,216,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,188,216,1)"}},"hoveron":"points","name":"Hazards","legendgroup":"Hazards","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[12.110155510902405,11.888324347138404,11.779067148827016,11.936734086461366,12.145931900292634,11.915018918924034,12.392984449490905,11.946201748773456,12.117190255783498,12.387142319977283],"y":[100.1226039269939,80.274899903312331,100.1262749556452,74.896475108899182,79.743437580019233,97.830956253968182,95.17043132204563,70.3573540436104,85.121253891475504,94.68419568855316],"text":["fct_reorder(Site, Latitude, .desc = TRUE): Little Corona<br />Algae: 100<br />Site: Little Corona","fct_reorder(Site, Latitude, .desc = TRUE): Little Corona<br />Algae:  80<br />Site: Little Corona","fct_reorder(Site, Latitude, .desc = TRUE): Little Corona<br />Algae: 100<br />Site: Little Corona","fct_reorder(Site, Latitude, .desc = TRUE): Little Corona<br />Algae:  75<br />Site: Little Corona","fct_reorder(Site, Latitude, .desc = TRUE): Little Corona<br />Algae:  80<br />Site: Little Corona","fct_reorder(Site, Latitude, .desc = TRUE): Little Corona<br />Algae:  98<br />Site: Little Corona","fct_reorder(Site, Latitude, .desc = TRUE): Little Corona<br />Algae:  95<br />Site: Little Corona","fct_reorder(Site, Latitude, .desc = TRUE): Little Corona<br />Algae:  70<br />Site: Little Corona","fct_reorder(Site, Latitude, .desc = TRUE): Little Corona<br />Algae:  85<br />Site: Little Corona","fct_reorder(Site, Latitude, .desc = TRUE): Little Corona<br />Algae:  95<br />Site: Little Corona"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,176,246,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,176,246,1)"}},"hoveron":"points","name":"Little Corona","legendgroup":"Little Corona","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[5.816772977262735,6.2797406248748304,6.0114993482828138,5.6419213222339746,5.7122438687831165,5.770820377394557,6.3587758127599958,6.2313901932910083,6.0397710576653481,5.7333076659590008],"y":[85.328672353737062,69.66740400176495,59.925713277794422,99.601597774587574,90.025363012962046,94.936760928109294,99.611690369620916,89.873331934213638,94.862031306698924,49.650600800849496],"text":["fct_reorder(Site, Latitude, .desc = TRUE): Point St. George<br />Algae:  85<br />Site: Point St. George","fct_reorder(Site, Latitude, .desc = TRUE): Point St. George<br />Algae:  70<br />Site: Point St. George","fct_reorder(Site, Latitude, .desc = TRUE): Point St. George<br />Algae:  60<br />Site: Point St. George","fct_reorder(Site, Latitude, .desc = TRUE): Point St. George<br />Algae: 100<br />Site: Point St. George","fct_reorder(Site, Latitude, .desc = TRUE): Point St. George<br />Algae:  90<br />Site: Point St. George","fct_reorder(Site, Latitude, .desc = TRUE): Point St. George<br />Algae:  95<br />Site: Point St. George","fct_reorder(Site, Latitude, .desc = TRUE): Point St. George<br />Algae: 100<br />Site: Point St. George","fct_reorder(Site, Latitude, .desc = TRUE): Point St. George<br />Algae:  90<br />Site: Point St. George","fct_reorder(Site, Latitude, .desc = TRUE): Point St. George<br />Algae:  95<br />Site: Point St. George","fct_reorder(Site, Latitude, .desc = TRUE): Point St. George<br />Algae:  50<br />Site: Point St. George"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"Point St. George","legendgroup":"Point St. George","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[5.3694252066314219,4.7773809596896175,5.3551961766555909,5.2955395389348272,4.9915566256269814,5.3155803514644502,5.1312260033562778,4.7010589400306344,5.2610198702663187,4.6168366633355618],"y":[10.20361534859985,5.3206320395693183,0.37707642000168562,0.073864024877548215,-0.081934989616274836,0.8638204831629992,-0.28418252728879451,-0.31056295502930881,0.045363936387002472,-0.075174956955015665],"text":["fct_reorder(Site, Latitude, .desc = TRUE): Pyramid Point<br />Algae:  10<br />Site: Pyramid Point","fct_reorder(Site, Latitude, .desc = TRUE): Pyramid Point<br />Algae:   5<br />Site: Pyramid Point","fct_reorder(Site, Latitude, .desc = TRUE): Pyramid Point<br />Algae:   0<br />Site: Pyramid Point","fct_reorder(Site, Latitude, .desc = TRUE): Pyramid Point<br />Algae:   0<br />Site: Pyramid Point","fct_reorder(Site, Latitude, .desc = TRUE): Pyramid Point<br />Algae:   0<br />Site: Pyramid Point","fct_reorder(Site, Latitude, .desc = TRUE): Pyramid Point<br />Algae:   1<br />Site: Pyramid Point","fct_reorder(Site, Latitude, .desc = TRUE): Pyramid Point<br />Algae:   0<br />Site: Pyramid Point","fct_reorder(Site, Latitude, .desc = TRUE): Pyramid Point<br />Algae:   0<br />Site: Pyramid Point","fct_reorder(Site, Latitude, .desc = TRUE): Pyramid Point<br />Algae:   0<br />Site: Pyramid Point","fct_reorder(Site, Latitude, .desc = TRUE): Pyramid Point<br />Algae:   0<br />Site: Pyramid Point"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(185,131,255,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(185,131,255,1)"}},"hoveron":"points","name":"Pyramid Point","legendgroup":"Pyramid Point","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[15.365928298234939,15.115884443186223,14.642988969758154,14.692471223138273,14.626067405380308,14.9519640667364,14.706762076169252,14.893513963185251,15.039023118279875],"y":[84.982029292732477,100.30229685343802,100.35124666318298,69.727586277201766,84.613565348275003,69.815714108757675,95.025319728069007,65.125189314223832,45.201181214302778],"text":["fct_reorder(Site, Latitude, .desc = TRUE): Scripps<br />Algae:  85<br />Site: Scripps","fct_reorder(Site, Latitude, .desc = TRUE): Scripps<br />Algae: 100<br />Site: Scripps","fct_reorder(Site, Latitude, .desc = TRUE): Scripps<br />Algae: 100<br />Site: Scripps","fct_reorder(Site, Latitude, .desc = TRUE): Scripps<br />Algae:  70<br />Site: Scripps","fct_reorder(Site, Latitude, .desc = TRUE): Scripps<br />Algae:  85<br />Site: Scripps","fct_reorder(Site, Latitude, .desc = TRUE): Scripps<br />Algae:  70<br />Site: Scripps","fct_reorder(Site, Latitude, .desc = TRUE): Scripps<br />Algae:  95<br />Site: Scripps","fct_reorder(Site, Latitude, .desc = TRUE): Scripps<br />Algae:  65<br />Site: Scripps","fct_reorder(Site, Latitude, .desc = TRUE): Scripps<br />Algae:  45<br />Site: Scripps"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(231,107,243,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(231,107,243,1)"}},"hoveron":"points","name":"Scripps","legendgroup":"Scripps","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[10.327432547323406,10.226416946016252,10.267628729343414,9.684238074533642,9.8359023742377758,10.037721470929682,9.6278196938335903,9.7355561457574371,10.23396243751049,10.178213094547392],"y":[80.249082913808522,35.258043376356362,69.677545814961192,19.995356990396978,30.00702144689858,24.677099223062395,29.989104792661966,19.866571578942239,80.028235837072131,89.844361523166299],"text":["fct_reorder(Site, Latitude, .desc = TRUE): Shell Beach<br />Algae:  80<br />Site: Shell Beach","fct_reorder(Site, Latitude, .desc = TRUE): Shell Beach<br />Algae:  35<br />Site: Shell Beach","fct_reorder(Site, Latitude, .desc = TRUE): Shell Beach<br />Algae:  70<br />Site: Shell Beach","fct_reorder(Site, Latitude, .desc = TRUE): Shell Beach<br />Algae:  20<br />Site: Shell Beach","fct_reorder(Site, Latitude, .desc = TRUE): Shell Beach<br />Algae:  30<br />Site: Shell Beach","fct_reorder(Site, Latitude, .desc = TRUE): Shell Beach<br />Algae:  25<br />Site: Shell Beach","fct_reorder(Site, Latitude, .desc = TRUE): Shell Beach<br />Algae:  30<br />Site: Shell Beach","fct_reorder(Site, Latitude, .desc = TRUE): Shell Beach<br />Algae:  20<br />Site: Shell Beach","fct_reorder(Site, Latitude, .desc = TRUE): Shell Beach<br />Algae:  80<br />Site: Shell Beach","fct_reorder(Site, Latitude, .desc = TRUE): Shell Beach<br />Algae:  90<br />Site: Shell Beach"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(253,97,209,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(253,97,209,1)"}},"hoveron":"points","name":"Shell Beach","legendgroup":"Shell Beach","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1.1767790663987399,0.6113587863743305,1.040731773711741,1.2000534588471055,0.65939348209649329,1.1247141277417541,1.2270161837339402,0.72879950515925884,1.1839455211535097,1.101333755813539],"y":[90.248806184343991,40.259430097416043,79.873449209332463,69.958971436880532,49.71565493904054,25.129753432981669,39.992539984732865,74.757164667733008,34.703347561880946,-0.18376936372369529],"text":["fct_reorder(Site, Latitude, .desc = TRUE): Starfish Point<br />Algae:  90<br />Site: Starfish Point","fct_reorder(Site, Latitude, .desc = TRUE): Starfish Point<br />Algae:  40<br />Site: Starfish Point","fct_reorder(Site, Latitude, .desc = TRUE): Starfish Point<br />Algae:  80<br />Site: Starfish Point","fct_reorder(Site, Latitude, .desc = TRUE): Starfish Point<br />Algae:  70<br />Site: Starfish Point","fct_reorder(Site, Latitude, .desc = TRUE): Starfish Point<br />Algae:  50<br />Site: Starfish Point","fct_reorder(Site, Latitude, .desc = TRUE): Starfish Point<br />Algae:  25<br />Site: Starfish Point","fct_reorder(Site, Latitude, .desc = TRUE): Starfish Point<br />Algae:  40<br />Site: Starfish Point","fct_reorder(Site, Latitude, .desc = TRUE): Starfish Point<br />Algae:  75<br />Site: Starfish Point","fct_reorder(Site, Latitude, .desc = TRUE): Starfish Point<br />Algae:  35<br />Site: Starfish Point","fct_reorder(Site, Latitude, .desc = TRUE): Starfish Point<br />Algae:   0<br />Site: Starfish Point"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(255,103,164,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(255,103,164,1)"}},"hoveron":"points","name":"Starfish Point","legendgroup":"Starfish Point","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":40.840182648401829,"r":7.3059360730593621,"b":25.570776255707766,"l":43.105022831050235},"paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"Algal Cover at Low Tide","font":{"color":"rgba(0,0,0,1)","family":"","size":17.534246575342465},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.40000000000000002,15.6],"tickmode":"array","ticktext":["Starfish Point","Cape Meares","Fogarty Creek","Cape Arago","Pyramid Point","Point St. George","Bodega","Cambria","Hazards","Shell Beach","Carpenteria","Little Corona","Crystal Cove","Dana Point","Scripps"],"tickvals":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],"categoryorder":"array","categoryarray":["Starfish Point","Cape Meares","Fogarty Creek","Cape Arago","Pyramid Point","Point St. George","Bodega","Cambria","Hazards","Shell Beach","Carpenteria","Little Corona","Crystal Cove","Dana Point","Scripps"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":false,"tickfont":{"color":null,"family":null,"size":0},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"Latitude (North to South)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-5.4291398429218685,105.39830913049168],"tickmode":"array","ticktext":["0","25","50","75","100"],"tickvals":[0,25,49.999999999999993,75,100],"categoryorder":"array","categoryarray":["0","25","50","75","100"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"Algae","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"69f817e0efb5":{"x":{},"y":{},"colour":{},"type":"box"},"69f830996052":{"x":{},"y":{},"colour":{}}},"cur_data":"69f817e0efb5","visdat":{"69f817e0efb5":["function (y) ","x"],"69f830996052":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

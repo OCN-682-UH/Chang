@@ -1,0 +1,100 @@
+---
+title: "Week 9 Homework"
+author: "Jasmine Chang"
+format:
+  html:
+    code-fold: TRUE
+    code-summary: "Show code"
+    toc: TRUE
+    toc-depth: 4
+    toc-location: right
+    toc-title: "Table of Contents"
+    fig-align: center
+warning: FALSE
+theme: cosmo
+editor: visual
+---
+
+## Homework
+
+Working with intertidal data. Your goal is to make a plot where at least one axis is a factor in a meaningful order.
+
+* Data files in the data/ folder: intertidal.csv and intertidal_latitude.csv (plus a data dictionary)
+* You may need to use string-cleaning skills (check out the {janitor} package) to tidy column names
+* If you visualize by tide height, it must go Low → Mid → High on the plot
+* If you visualize by site, it must go in order of latiude (N->S or S->N)
+
+## Loading Libraries
+
+```{r}
+library(tidyverse)
+library(here)
+library(janitor)
+library(ggplot2)
+library(plotly)
+```
+
+## Calling Data
+
+### Intertidal
+
+```{r}
+intertidal<-read_csv(here("Week_9", "data", "intertidaldata.csv"))
+glimpse(intertidal)
+```
+### Intertidal Latitude
+
+```{r}
+intertidallat<-read_csv(here("Week_9", "data", "intertidaldata_latitude.csv"))
+glimpse(intertidallat)
+                         
+```
+
+## Clean Data
+
+### Looking at quadrat data only from low tide
+
+
+```{r}
+intertidal_low<- intertidal |>
+  filter(Quadrat=="Low") # only look at quardats collected at low tide
+intertidal_low
+
+```
+
+### Combine Data
+
+Also adding the correlating coordinates to the sites from intertidal lat data set.
+
+```{r}
+intertidallat_low<- intertidal_low|>
+  left_join(intertidallat, by="Site")# combining latitude data, adding a column in intertidal_low
+intertidallat_low
+```
+
+## Data visualization
+
+```{r}
+ggplot(intertidallat_low, aes(x=Site, y=Algae, color=Site))+
+  geom_boxplot()+
+  geom_jitter()+ # good visualization of all the data points
+  labs(title="Algae at Low Tide", x="Location", y="Algae")+ 
+  theme_minimal()+
+  theme(axis.text.x = element_blank()) # get rid of all crazy x labels
+```
+
+## Applying Factor
+
+```{r}
+algae_low<- ggplot(intertidallat_low, aes(x=fct_reorder(Site, Latitude, .desc=TRUE), y=Algae, color=Site))+ # fct_reorder puts the sites in order of latitude, .desc = TRUE I found online; puts them in descending order, resulting in N->S
+  geom_boxplot()+
+  geom_jitter()+
+  labs(title="Algal Cover at Low Tide", x="Latitude (North to South)", y="Algae")+ 
+  theme_minimal()+
+  theme(axis.text.x = element_blank(),# get rid of all crazy x labels
+        legend.position="none") # also get rid of the busy legend
+
+ggplotly(algae_low) # make it a plotly so you can still see coordinates and site name
+```
+
+
