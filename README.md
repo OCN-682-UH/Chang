@@ -32,6 +32,11 @@
   * Outputs
   * [Good Plot Bad Plot](https://01a155b5-e0af-3ba3-e408-7b213f17043f.share.connect.posit.cloud/)
   * [Week 8 Homework](https://01a1568e-12f0-ab4d-0696-456026743f37.share.connect.posit.cloud/)
+* [Week9]()
+  * Data
+  * Scripts
+  * Outputs
+  * [Week 9 Homework](https://01a17b26-f5ee-346d-8b6b-c142b5445321.share.connect.posit.cloud/)
 
 ### **About me**
 Welina mai kākou me ke aloha! O wau ʻo Jasmine-Kuʻupua. Ua hānau ʻia, a hānai ʻia i Waimānalo Oʻahu. ʻAkahi nō au a hoʻomaka i kaʻu makahiki mua loa ma ke ʻano he haumana laeʻula ʻepekema kai ma ke kula nui o Hawaiʻi ma Mānoa. Pīhoihoi wau no kēia papa! 
