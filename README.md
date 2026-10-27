@@ -32,7 +32,7 @@
   * Outputs
   * [Good Plot Bad Plot](https://01a155b5-e0af-3ba3-e408-7b213f17043f.share.connect.posit.cloud/)
   * [Week 8 Homework](https://01a1568e-12f0-ab4d-0696-456026743f37.share.connect.posit.cloud/)
-* [Week9]()
+* [Week 9]()
   * Data
   * Scripts
   * Outputs
