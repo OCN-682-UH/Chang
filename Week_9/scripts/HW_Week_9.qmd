@@ -19,10 +19,10 @@ editor: visual
 
 Working with intertidal data. Your goal is to make a plot where at least one axis is a factor in a meaningful order.
 
-* Data files in the data/ folder: intertidal.csv and intertidal_latitude.csv (plus a data dictionary)
-* You may need to use string-cleaning skills (check out the {janitor} package) to tidy column names
-* If you visualize by tide height, it must go Low → Mid → High on the plot
-* If you visualize by site, it must go in order of latiude (N->S or S->N)
+- Data files in the data/ folder: intertidal.csv and intertidal_latitude.csv (plus a data dictionary)
+- You may need to use string-cleaning skills (check out the {janitor} package) to tidy column names
+- If you visualize by tide height, it must go Low → Mid → High on the plot
+- If you visualize by site, it must go in order of latiude (N-\>S or S-\>N)
 
 ## Loading Libraries
 
@@ -42,6 +42,7 @@ library(plotly)
 intertidal<-read_csv(here("Week_9", "data", "intertidaldata.csv"))
 glimpse(intertidal)
 ```
+
 ### Intertidal Latitude
 
 ```{r}
@@ -53,7 +54,6 @@ glimpse(intertidallat)
 ## Clean Data
 
 ### Looking at quadrat data only from low tide
-
 
 ```{r}
 intertidal_low<- intertidal |>
@@ -96,5 +96,3 @@ algae_low<- ggplot(intertidallat_low, aes(x=fct_reorder(Site, Latitude, .desc=TR
 
 ggplotly(algae_low) # make it a plotly so you can still see coordinates and site name
 ```
-
-
