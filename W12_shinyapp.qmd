@@ -1,0 +1,56 @@
+---
+title: "W12_shiny"
+author: "Jasmine Chang"
+format: html
+editor: visual
+---
+
+## Intro into Shiny Apps
+
+### When is Shiny Useful?
+
+When we want to make R code accessible outside of an R or RStudio environment. For example:
+* Teaching a package
+* Showing data visualizations to non-experts
+* Streamlining certain code-intensive things (like database queries or visualizing bulky simulation outputs)
+
+#### Examples
+* Teaching population growth models Population Dynamics Lab
+* Visualize model projections Marine Mammal Bycatch model Siple et al. (2022) Journal of Open Source Software
+* To have fun
+
+### Each Shiny App Has Two Components
+The ui (user interface) object dictates the appearance of the app. UI functions write HTML. For something to appear in your app, it needs to be in the UI.
+
+The server() function contains rendering expressions that create the objects to display.
+
+****** The app has to have the same name as the folder ******
+
+The server function and UI object are passed to the shinyApp() function to create a Shiny app object.
+
+Add Elements to Your App as Arguments to fluidPage
+
+```{r}
+library(shiny)
+
+ui <- fluidPage('Hello World') # code to create a webpage
+
+server <- function(input, output){}
+
+shinyApp(ui = ui, server = server) # turn user interface and server into a shiny app
+```
+
+#### Add Elements to Your App using fluipage()
+
+```{r}
+ui<- fluidPage(
+  # Inputs functions
+  # Outputs functions
+)
+```
+
+Create an Input with a *Input Function
+
+There are many types of inputs and the syntax for all of them is typeinput. To make a slider we use sliderInput(). 
+These inputs make a bunch of HTML code behing the scene:
+
