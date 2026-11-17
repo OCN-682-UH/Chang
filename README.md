@@ -42,7 +42,7 @@
   * Data
   * Scripts
   * Outputs
-*[Week 12]()
+* [Week 12]()
   * [Shiny App HW](https://01a1e6e5-8eee-bd6c-4f02-df3ba1a1ea43.share.connect.posit.cloud/)
   * Scripts
 
