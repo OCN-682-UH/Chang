@@ -13,11 +13,11 @@ format:
 warning: FALSE
 theme: cosmo
 editor: visual
-
 ---
-# Good Plot vs Bad Plot
-# Many Penguins!!!
 
+# Good Plot vs Bad Plot
+
+# Many Penguins!!!
 
 ```{r}
 #| echo: TRUE
@@ -33,15 +33,17 @@ library(ggfx)
 
 ```
 
-
 ## Load Data
+
 ```{r}
 
 many_penguins <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-07-14/many_penguins.csv')
 
 glimpse(many_penguins)
 ```
+
 ## Clean Data
+
 ```{r}
 
 many_clean<-many_penguins|>
@@ -52,6 +54,7 @@ glimpse(many_clean)
 ```
 
 ## Good Plot
+
 ```{r}
 #| echo: false
 #| eval: false
@@ -120,7 +123,6 @@ subplot(
   )
 ```
 
-
 ```{r}
 #| label: fig-penguins-pretty
 #| fig-cap: Penguin Wing Length among Genus
@@ -138,25 +140,26 @@ ggplotly(good) #converts ggplot to plotly
 
 # couldn't figure out how to make a linear line like geom_smooth
 ```
-The wing length among various penguin species within the six genus (Aptenodytes, Eudyptes, Eudyptula, Megadyptes, Pygoscelis, and Sphenicus) are represented in @fig-penguins-pretty. 
+
+The wing length among various penguin species within the six genus (Aptenodytes, Eudyptes, Eudyptula, Megadyptes, Pygoscelis, and Sphenicus) are represented in @fig-penguins-pretty.
 
 ### What's good about this plot?
 
 #### Clarity
 
-* Presents raw data
-* Not too many points, variables, or series
-* No legend
-* Simple and organized
-  * Emphasis put on the six genus, instead of each species
-* No special symbols or lines
-  
+- Presents raw data
+- Not too many points, variables, or series
+- No legend
+- Simple and organized
+  - Emphasis put on the six genus, instead of each species
+- No special symbols or lines
+
 #### Aesthetics
 
-* Not cluttered
-  * No unnecessary elements 
-* Thoughtful color schemes
-* Simple and legible fonts
+- Not cluttered
+  - No unnecessary elements
+- Thoughtful color schemes
+- Simple and legible fonts
 
 ## Bad Plot
 
@@ -194,23 +197,23 @@ bad_plot
 ggsave(here("Week_8","outputs","bad_plot.png"))
 ```
 
-In @fig-penguins_ugly, we can have a very hard time interpreting what is going on for a number of reasons... This plot seems to compare wing and tail across a number of penguin species. 
+In @fig-penguins_ugly, we can have a very hard time interpreting what is going on for a number of reasons... This plot seems to compare wing and tail across a number of penguin species.
 
 ### What's bad about this plot?
 
 #### Clarity
 
-* There are too many data points
-* The legend is overwhelming
-* Nothing is put into context
-* The title is vague and unclear
-* There is an unnecessary trend line
+- There are too many data points
+- The legend is overwhelming
+- Nothing is put into context
+- The title is vague and unclear
+- There is an unnecessary trend line
 
 #### Aesthetics
 
-* Very cluttered
-  * Boxes are too large and close together
-* The coloring is distracting and confusing
-  * Grid color and species colors
-* Distracting and large font
-  * Title font and legend font don't match
+- Very cluttered
+  - Boxes are too large and close together
+- The coloring is distracting and confusing
+  - Grid color and species colors
+- Distracting and large font
+  - Title font and legend font don't match
