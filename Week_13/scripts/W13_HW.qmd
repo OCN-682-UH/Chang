@@ -1,0 +1,9 @@
+---
+title: "W13_HW"
+author: "Jasmine Chang"
+format: html
+editor: visual
+---
+
+## Homework
+You have a set of 4 .csv files in data/homework. Each file is a timeseries of temperature and light data collected in tide pools in Oregon by Jenn Fields. Bring in all 4 files and calculate the mean and standard deviation of both temperature (Temp.C) and light (Intensity.lux) for each tide pool.he output of embedded code. You can embed code like this:

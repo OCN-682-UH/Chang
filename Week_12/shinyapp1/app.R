@@ -42,7 +42,7 @@ server <- function(input, output){
       })
       
   output$degree <- renderPlot({
-    validate(need(nrow(filtered()) > 0, "NA"))
+    validate(need(nrow(filtered()) > 0, "NA")) 
     
     ggplot(filtered(), aes(x = education_level)) + # give data for education level
       geom_bar() +
