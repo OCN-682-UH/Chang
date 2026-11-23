@@ -45,6 +45,11 @@
 * [Week 12]()
   * [Shiny App HW](https://01a1e6e5-8eee-bd6c-4f02-df3ba1a1ea43.share.connect.posit.cloud/)
   * Scripts
+* [Week 13]()
+  * [Homework](https://01a20a87-88fc-e2ac-2e1b-d054d2196599.share.connect.posit.cloud/)
+  * Data
+  * Scripts
+  * [Outputs]()
 
 ### **About me**
 Welina mai kākou me ke aloha! O wau ʻo Jasmine-Kuʻupua. Ua hānau ʻia, a hānai ʻia i Waimānalo Oʻahu. ʻAkahi nō au a hoʻomaka i kaʻu makahiki mua loa ma ke ʻano he haumana laeʻula ʻepekema kai ma ke kula nui o Hawaiʻi ma Mānoa. Pīhoihoi wau no kēia papa! 
