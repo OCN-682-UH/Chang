@@ -18,8 +18,7 @@ library(here)
 
 for loops are one way to run an iterative process (do something over and over again). With the tidyverse you can avoid loops for almost any basic coding need. Where they come in handy is in population modeling and Bayesian modeling, for example. They are also integral to programming and happen “under the hood” whether you use them or not.
 
-For loops have two major parts: an indexing statement and a command (or set of commands) to repeat. The coding is in base R.
-The command looks like this:
+For loops have two major parts: an indexing statement and a command (or set of commands) to repeat. The coding is in base R. The command looks like this:
 
 ```{r}
 for (index in sequence) { # "for" is the function
@@ -29,9 +28,10 @@ for (index in sequence) { # "for" is the function
 
 ### Simple for loop
 
-Ask R to print statement telling us what year it is along a sequence of years. 
+Ask R to print statement telling us what year it is along a sequence of years.
 
 Start with with the simple code for one year:
+
 ```{r}
 print(paste("The year is", 2000))
 ```
@@ -46,8 +46,7 @@ for (i in years) { # i is the index
   }
 ```
 
-What we just did printed something over and over, but did not save it anywhere. To save a new vector with all the years, we need to pre-allocate space and tell R where it is going to be saved.
-Create an empty dataframe called year_data with columns for year and year_name
+What we just did printed something over and over, but did not save it anywhere. To save a new vector with all the years, we need to pre-allocate space and tell R where it is going to be saved. Create an empty dataframe called year_data with columns for year and year_name
 
 ```{r}
 # pre-allocate space: empty columns as long as the years vector
@@ -58,7 +57,7 @@ year_data <- tibble(year=rep(NA, length(years)), # rep = repeat
 year_data
 ```
 
-Creating a blank data sheet to fill in. 
+Creating a blank data sheet to fill in.
 
 Add the for loop, one line at a time. First add the column that will hold all the names. Notice the index i in the column name. The index goes along seq_along(years), which is 1:7 here. Using seq_along() lets you change the number of years without changing the loop.
 
@@ -71,16 +70,14 @@ for (i in seq_along(years)) {
 year_data
 ```
 
-Using loops to read in multiple .csv files
-Let’s say you have multiple data files and want to perform the same action on each. You can use a for loop to do this.
-In the data folder you will see a subfolder called cond_data. It has 3 files of salinity and temperature data collected from Mo’orea during a spatial survey.
-Read in one of the files so you can see what it looks like:
+Using loops to read in multiple .csv files Let’s say you have multiple data files and want to perform the same action on each. You can use a for loop to do this. In the data folder you will see a subfolder called cond_data. It has 3 files of salinity and temperature data collected from Mo’orea during a spatial survey. Read in one of the files so you can see what it looks like:
 
 ```{r}
 testdata <- read_csv(here("Week_13","data", "011521_CT316_1pcal.csv"))
 
 glimpse(testdata)
 ```
+
 #### List files in a directory
 
 ```{r}
@@ -95,6 +92,7 @@ files
 ```
 
 #### Pre-allocate space for the loop
+
 Letʻs calculate the mean temperature and salinity from each file and save it
 
 ```{r}
@@ -165,16 +163,9 @@ cond_data
 
 ### map functions
 
-The pattern of looping over a vector, doing something to each element and saving the results is so common that purrr provides a family of functions to do it for you. There is one function for each type of output:
-* map() makes a list
-* map_lgl() makes a logical vector
-* map_int() makes an integer vector
-* map_dbl() makes a double vector
-* map_chr() makes a character vector
-* map() + list_rbind() makes a dataframe
- 
-Each function takes a vector as input, applies a function to each piece, and returns a new vector that is the same length (and has the same names) as the input. Source: R4DS
+The pattern of looping over a vector, doing something to each element and saving the results is so common that purrr provides a family of functions to do it for you. There is one function for each type of output: \* map() makes a list \* map_lgl() makes a logical vector \* map_int() makes an integer vector \* map_dbl() makes a double vector \* map_chr() makes a character vector \* map() + list_rbind() makes a dataframe
 
+Each function takes a vector as input, applies a function to each piece, and returns a new vector that is the same length (and has the same names) as the input. Source: R4DS
 
 #### example
 
@@ -184,14 +175,16 @@ There are 3 ways to do the same thing in a map() function
 1:10 # a vector from 1 to 10 (we are doing this 10 times)
 ```
 
-For each value in 1:10, make a vector of 15 random numbers from a normal distribution: 
+For each value in 1:10, make a vector of 15 random numbers from a normal distribution:
 
 ```{r}
 set.seed(3817) # makes the random numbers reproducible
 1:10 |> # the vector to iterate over
   map(rnorm, n=15) # 15 random numers from a normal distribution, in a list
 ```
+
 Calculate the mean of each list element:
+
 ```{r}
 set.seed(3817)
 1:10|>
@@ -200,8 +193,7 @@ set.seed(3817)
 
 ```
 
-Same thing, different notation....
-Option 2: make your own function
+Same thing, different notation.... Option 2: make your own function
 
 ```{r}
 set.seed(3817)
@@ -210,7 +202,7 @@ set.seed(3817)
   map_dbl(mean)
 ```
 
-Option 3:  Use a formula
+Option 3: Use a formula
 
 ```{r}
 set.seed(3817)
@@ -219,7 +211,7 @@ set.seed(3817)
   map_dbl(mean)
 ```
 
-^ Because we used the same seed, all three notations give identical results
+\^ Because we used the same seed, all three notations give identical results
 
 #### Bring in files sing purrr instead of for loop
 
@@ -239,6 +231,7 @@ files <- dir(path=CondPath, pattern=".csv", full.names=TRUE) # saves the entire 
 
 files
 ```
+
 #### Read in the files
 
 Read in the files using map() instead of a for loop, then stack the list of dataframes into one with list_rbind(), keeping the filename as a column.
@@ -281,6 +274,7 @@ data
 ```
 
 #### Other uses: a plot for every file (purrr)
+
 When you want a function’s side effect (saving a file, printing) rather than a returned value, use walk() instead of map().
 
 ```{r}
@@ -324,6 +318,7 @@ for (i in seq_along(file_names)) {
          plot = p, width = 6, height = 4)
 }
 ```
+
 Check the output folder:
 
 ```{r}
@@ -341,4 +336,3 @@ remotes::install_github("jespermaag/gganatogram")
 ```
 
 ## gganatogram
-
