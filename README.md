@@ -48,7 +48,7 @@
 * [Week 13]()
   * Data
   * Scripts
-  * [Outputs]()
+  * Outputs
     * [forloops](https://github.com/OCN-682-UH/Chang/tree/762cedd34c805dcb5a49d22afa4040c6153172df/Week_13/outputs/for_loops)
     * [map()](https://github.com/OCN-682-UH/Chang/tree/762cedd34c805dcb5a49d22afa4040c6153172df/Week_13/outputs/map)
   * [Week 13 Homework](https://01a20a87-88fc-e2ac-2e1b-d054d2196599.share.connect.posit.cloud/)
