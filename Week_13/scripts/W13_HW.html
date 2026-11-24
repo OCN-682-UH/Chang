@@ -72,15 +72,181 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="W13_HW_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="W13_HW_files/libs/quarto-html/anchor.min.js"></script>
 <link href="W13_HW_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="W13_HW_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="W13_HW_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="W13_HW_files/libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="W13_HW_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="W13_HW_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="W13_HW_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="W13_HW_files/libs/bootstrap/bootstrap-c2e55264ed47ce3b2e0326a2269f9400.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="W13_HW_files/libs/bootstrap/bootstrap-917079515d91bccb85b543faf8aa8bb6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="W13_HW_files/libs/bootstrap/bootstrap-dark-315d6aab86e8574448027243d3b57604.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="W13_HW_files/libs/bootstrap/bootstrap-917079515d91bccb85b543faf8aa8bb6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="W13_HW_files/libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="W13_HW_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
 
 </head>
 
-<body class="quarto-light">
+<body class="quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const darkModeDefault = authorPrefersDark;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -90,22 +256,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#homework" id="toc-homework" class="nav-link active" data-scroll-target="#homework">Homework</a></li>
   <li><a href="#load-library" id="toc-load-library" class="nav-link" data-scroll-target="#load-library">Load Library</a></li>
+  <li><a href="#reading-in-the-data" id="toc-reading-in-the-data" class="nav-link" data-scroll-target="#reading-in-the-data">Reading in the data</a>
+  <ul>
+  <li><a href="#reading-in-multiple-csvʻs-at-once" id="toc-reading-in-multiple-csvʻs-at-once" class="nav-link" data-scroll-target="#reading-in-multiple-csvʻs-at-once">Reading in multiple csvʻs at once</a></li>
+  </ul></li>
   <li><a href="#for-loop" id="toc-for-loop" class="nav-link" data-scroll-target="#for-loop">for loop</a>
   <ul>
-  <li><a href="#using-for-loops-to-read-in-multiple-csv-files-at-once" id="toc-using-for-loops-to-read-in-multiple-csv-files-at-once" class="nav-link" data-scroll-target="#using-for-loops-to-read-in-multiple-csv-files-at-once">Using for loops to read in multiple csv files at once</a></li>
-  <li><a href="#calculate-mean-and-standard-deviation-of-temperature-temp.c-and-light-intensity.lux" id="toc-calculate-mean-and-standard-deviation-of-temperature-temp.c-and-light-intensity.lux" class="nav-link" data-scroll-target="#calculate-mean-and-standard-deviation-of-temperature-temp.c-and-light-intensity.lux">Calculate mean and standard deviation of temperature (Temp.C) and light (Intensity.lux)</a></li>
   <li><a href="#pre-allocating-space-in-a-data-set" id="toc-pre-allocating-space-in-a-data-set" class="nav-link" data-scroll-target="#pre-allocating-space-in-a-data-set">Pre-allocating space in a data set</a></li>
   <li><a href="#turning-it-into-for-loop" id="toc-turning-it-into-for-loop" class="nav-link" data-scroll-target="#turning-it-into-for-loop">Turning it into for loop</a></li>
   <li><a href="#creating-a-plot-for-every-file-using-for-loops" id="toc-creating-a-plot-for-every-file-using-for-loops" class="nav-link" data-scroll-target="#creating-a-plot-for-every-file-using-for-loops">Creating a plot for every file using for loops</a></li>
   </ul></li>
-  <li><a href="#map" id="toc-map" class="nav-link" data-scroll-target="#map">map()</a>
+  <li><a href="#purrr-map" id="toc-purrr-map" class="nav-link" data-scroll-target="#purrr-map">purrr map()</a>
   <ul>
+  <li><a href="#read-in-the-files-using-purrr-map" id="toc-read-in-the-files-using-purrr-map" class="nav-link" data-scroll-target="#read-in-the-files-using-purrr-map">Read in the files using purrr map()</a></li>
   <li><a href="#calculate-mean-and-standard-deviation-for-temperature-and-light-using-map" id="toc-calculate-mean-and-standard-deviation-for-temperature-and-light-using-map" class="nav-link" data-scroll-target="#calculate-mean-and-standard-deviation-for-temperature-and-light-using-map">Calculate mean and standard deviation for temperature and light using map()</a></li>
+  <li><a href="#creating-multiple-plots-at-once-using-map" id="toc-creating-multiple-plots-at-once-using-map" class="nav-link" data-scroll-target="#creating-multiple-plots-at-once-using-map">Creating multiple plots at once using map()</a></li>
   </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion:</a></li>
   </ul>
 </nav>
 </div>
 <main class="content" id="quarto-document-content">
+
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -134,7 +306,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="homework" class="level2">
 <h2 class="anchored" data-anchor-id="homework">Homework</h2>
-<p>You have a set of 4 .csv files in data/homework. Each file is a timeseries of temperature and light data collected in tide pools in Oregon by Jenn Fields. Bring in all 4 files and calculate the mean and standard deviation of both temperature (Temp.C) and light (Intensity.lux) for each tide pool.he output of embedded code. You can embed code like this:</p>
+<p>You have a set of 4 .csv files in data/homework. Each file is a timeseries of temperature and light data collected in tide pools in Oregon by Jenn Fields.</p>
+<ul>
+<li><p>Bring in all 4 files and calculate the mean and standard deviation of both temperature (Temp.C) and light (Intensity.lux) for each tide pool.</p></li>
+<li><p>Use for loop and map() functions in script</p></li>
+</ul>
 </section>
 <section id="load-library" class="level2">
 <h2 class="anchored" data-anchor-id="load-library">Load Library</h2>
@@ -142,15 +318,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
-<section id="for-loop" class="level2">
-<h2 class="anchored" data-anchor-id="for-loop">for loop</h2>
-<section id="using-for-loops-to-read-in-multiple-csv-files-at-once" class="level3">
-<h3 class="anchored" data-anchor-id="using-for-loops-to-read-in-multiple-csv-files-at-once">Using for loops to read in multiple csv files at once</h3>
-<p>First, test out the data path</p>
+<section id="reading-in-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="reading-in-the-data">Reading in the data</h2>
+<section id="reading-in-multiple-csvʻs-at-once" class="level3">
+<h3 class="anchored" data-anchor-id="reading-in-multiple-csvʻs-at-once">Reading in multiple csvʻs at once</h3>
+<p>First, test out the data path –&gt;</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
@@ -169,26 +347,26 @@ $ Intensity.lux   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 $ LoggerDepth     &lt;dbl&gt; 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, …</code></pre>
 </div>
 </div>
-<p>Next, list files in a directory</p>
+<p>Next, list files in a directory and set the path “TidePath”</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># path to the folder on my computer</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>CondPath <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"Week_13"</span>, <span class="st">"data"</span>, <span class="st">"homework"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>TidePath <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"Week_13"</span>, <span class="st">"data"</span>, <span class="st">"homework"</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># List all files in that path matching a pattern, anything with ".csv"</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>files <span class="ot">&lt;-</span> <span class="fu">dir</span>(<span class="at">path =</span> CondPath, <span class="at">pattern =</span> <span class="st">".csv"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>files <span class="ot">&lt;-</span> <span class="fu">dir</span>(<span class="at">path =</span> TidePath, <span class="at">pattern =</span> <span class="st">".csv"</span>)</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>files</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>files <span class="co"># take a look</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "TP1.csv" "TP2.csv" "TP3.csv" "TP4.csv"</code></pre>
 </div>
 </div>
 </section>
-<section id="calculate-mean-and-standard-deviation-of-temperature-temp.c-and-light-intensity.lux" class="level3">
-<h3 class="anchored" data-anchor-id="calculate-mean-and-standard-deviation-of-temperature-temp.c-and-light-intensity.lux">Calculate mean and standard deviation of temperature (Temp.C) and light (Intensity.lux)</h3>
 </section>
+<section id="for-loop" class="level2">
+<h2 class="anchored" data-anchor-id="for-loop">for loop</h2>
 <section id="pre-allocating-space-in-a-data-set" class="level3">
 <h3 class="anchored" data-anchor-id="pre-allocating-space-in-a-data-set">Pre-allocating space in a data set</h3>
 <div class="cell">
@@ -202,7 +380,7 @@ $ LoggerDepth     &lt;dbl&gt; 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">mean_light =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(files)),</span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">light_sd =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(files)))</span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>oregon_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>oregon_data <span class="co"># take a look</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 5
@@ -219,7 +397,7 @@ $ LoggerDepth     &lt;dbl&gt; 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test by reading in the first file</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>raw_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">paste0</span>(CondPath, <span class="st">"/"</span>, files[<span class="dv">1</span>]))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>raw_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">paste0</span>(TidePath, <span class="st">"/"</span>, files[<span class="dv">1</span>]))</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(raw_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
@@ -235,11 +413,12 @@ $ LoggerDepth     &lt;dbl&gt; 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.
 # ℹ 1 more variable: LoggerDepth &lt;dbl&gt;</code></pre>
 </div>
 </div>
+<p>Testing out calculations :</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>mean_temp <span class="ot">&lt;-</span> <span class="fu">mean</span>(raw_data<span class="sc">$</span>Temp.C, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co">#test</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>sd_temp <span class="ot">&lt;-</span> <span class="fu">sd</span>(raw_data<span class="sc">$</span>Temp.C, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>sd_temp <span class="ot">&lt;-</span> <span class="fu">sd</span>(raw_data<span class="sc">$</span>Temp.C, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># test</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>mean_temp</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
@@ -259,7 +438,7 @@ $ LoggerDepth     &lt;dbl&gt; 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(files)) { <span class="co"># loop over each file (1, 2, 3, 4), This part confuses me</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(files)) { <span class="co"># loop over each file (1, 2, 3, 4), reading each file</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -271,7 +450,7 @@ $ LoggerDepth     &lt;dbl&gt; 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(files)) { <span class="co"># filling in the dataframe</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  raw_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">paste0</span>(CondPath, <span class="st">"/"</span>, files[i])) <span class="co"># what files to load in</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  raw_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">paste0</span>(TidePath, <span class="st">"/"</span>, files[i])) <span class="co"># what files to load in</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  oregon_data<span class="sc">$</span>filename[i] <span class="ot">&lt;-</span> files[i] <span class="co"># assigning the rows</span></span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  oregon_data<span class="sc">$</span>mean_temp[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(raw_data<span class="sc">$</span>Temp.C, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># ave. temp</span></span>
@@ -290,23 +469,26 @@ $ LoggerDepth     &lt;dbl&gt; 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>file_names <span class="ot">&lt;-</span> <span class="fu">dir</span>(<span class="at">path =</span> CondPath, <span class="at">pattern =</span> <span class="st">".csv"</span>) <span class="co"># just the file names</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>file_names <span class="ot">&lt;-</span> <span class="fu">dir</span>(<span class="at">path =</span> TidePath, <span class="at">pattern =</span> <span class="st">".csv"</span>) <span class="co"># just the file names</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(file_names)) { <span class="co"># applying the loop to all 4 files</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  raw_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">paste0</span>(CondPath, <span class="st">"/"</span>, file_names[i])) <span class="co"># following the same path to data</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  site_name <span class="ot">&lt;-</span> <span class="fu">str_remove</span>(file_names[i], <span class="st">"</span><span class="sc">\\</span><span class="st">.csv"</span>) <span class="co"># drop ".csv" for the title</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(raw_data, <span class="fu">aes</span>(<span class="at">x =</span> Date.Time, <span class="at">y =</span> Temp.C, <span class="at">color =</span> Intensity.lux)) <span class="sc">+</span> <span class="co">#greating ggplot using 4 data sets</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co"># geompoint seems to make the most sense</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> site_name, <span class="at">x =</span> <span class="st">"Date"</span>, <span class="at">y =</span> <span class="st">"Temperature (°C)"</span>, <span class="at">color =</span> <span class="st">"Light Intensity"</span>) <span class="co">#title will change according to file</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggsave</span>(<span class="fu">here</span>(<span class="st">"Week_13"</span>, <span class="st">"outputs"</span>, <span class="st">"for_loops"</span>, <span class="fu">paste0</span>(site_name, <span class="st">"_temp.png"</span>)), <span class="co"># save all plots in this location</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">plot =</span> p1, <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">4</span>)</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>p1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    raw_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">paste0</span>(TidePath, <span class="st">"/"</span>, file_names[i]), </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">col_types =</span> <span class="fu">cols</span>(<span class="at">Intensity.lux =</span> <span class="fu">col_character</span>())) <span class="sc">|&gt;</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Date.Time     =</span> <span class="fu">mdy_hm</span>(Date.Time),               <span class="co"># text -&gt; real date-time</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">Intensity.lux =</span> <span class="fu">parse_number</span>(Intensity.lux))     <span class="co"># "1,032" -&gt; 1032</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  site_name <span class="ot">&lt;-</span> <span class="fu">str_remove</span>(file_names[i], <span class="st">"</span><span class="sc">\\</span><span class="st">.csv"</span>) <span class="co"># drop ".csv" for the title</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(raw_data, <span class="fu">aes</span>(<span class="at">x =</span> Date.Time, <span class="at">y =</span> Temp.C, <span class="at">color =</span> Intensity.lux)) <span class="sc">+</span> <span class="co">#creating ggplot using 4 data sets</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co"># geompoint seems to make the most sense</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> site_name, <span class="at">x =</span> <span class="st">"Date"</span>, <span class="at">y =</span> <span class="st">"Temperature (°C)"</span>, <span class="at">color =</span> <span class="st">"Light Intensity"</span>) <span class="co">#title will change according to file, the x-axis is illegible but I couldnʻt figure out how to get rid of the time.</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggsave</span>(<span class="fu">here</span>(<span class="st">"Week_13"</span>, <span class="st">"outputs"</span>, <span class="st">"for_loops"</span>, <span class="fu">paste0</span>(site_name, <span class="st">"_temp.png"</span>)), <span class="co"># save all plots in this location</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">plot =</span> p1, <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">4</span>)</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>p1 <span class="co"># preview</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -318,17 +500,17 @@ $ LoggerDepth     &lt;dbl&gt; 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.
 </div>
 </section>
 </section>
-<section id="map" class="level2">
-<h2 class="anchored" data-anchor-id="map">map()</h2>
+<section id="purrr-map" class="level2">
+<h2 class="anchored" data-anchor-id="purrr-map">purrr map()</h2>
 <p>Listing files in directory again</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># path to the folder on my computer</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>CondPath <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"Week_13"</span>, <span class="st">"data"</span>, <span class="st">"homework"</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>TidePath <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"Week_13"</span>, <span class="st">"data"</span>, <span class="st">"homework"</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># List all files in that path matching a pattern, anything with ".csv"</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>files <span class="ot">&lt;-</span> <span class="fu">dir</span>(<span class="at">path =</span> CondPath, <span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">.csv$"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>files <span class="ot">&lt;-</span> <span class="fu">dir</span>(<span class="at">path =</span> TidePath, <span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">.csv$"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>files</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
@@ -339,13 +521,14 @@ $ LoggerDepth     &lt;dbl&gt; 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.
 [4] "/Users/jazzychang/Desktop/MBIO_612/R repositories/Chang/Week_13/data/homework/TP4.csv"</code></pre>
 </div>
 </div>
-<p>Read in the files using map()</p>
+<section id="read-in-the-files-using-purrr-map" class="level3">
+<h3 class="anchored" data-anchor-id="read-in-the-files-using-purrr-map">Read in the files using purrr map()</h3>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> files <span class="sc">|&gt;</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_names</span>() <span class="sc">|&gt;</span> <span class="co"># names each list element with its file name</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(read_csv) <span class="sc">|&gt;</span> <span class="co"># a list of 4 dataframes</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(read_csv) <span class="sc">|&gt;</span> <span class="co"># a list of 4 dataframes/tibble</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>(<span class="at">names_to =</span> <span class="st">"filename"</span>) <span class="co"># stack them; list names go in a "filename" column, has the entire name</span></span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -368,6 +551,7 @@ $ LoggerDepth     &lt;dbl&gt; 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.
 # ℹ 1 more variable: LoggerDepth &lt;dbl&gt;</code></pre>
 </div>
 </div>
+</section>
 <section id="calculate-mean-and-standard-deviation-for-temperature-and-light-using-map" class="level3">
 <h3 class="anchored" data-anchor-id="calculate-mean-and-standard-deviation-for-temperature-and-light-using-map">Calculate mean and standard deviation for temperature and light using map()</h3>
 <div class="cell">
@@ -395,34 +579,126 @@ $ LoggerDepth     &lt;dbl&gt; 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.
 4 /Users/jazzychang/Desktop/MBIO_612/R re…      13.2    2.27       655.    2089.</code></pre>
 </div>
 </div>
-<p>Saving multiple plots at once using map()</p>
+</section>
+<section id="creating-multiple-plots-at-once-using-map" class="level3">
+<h3 class="anchored" data-anchor-id="creating-multiple-plots-at-once-using-map">Creating multiple plots at once using map()</h3>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>file_names <span class="ot">&lt;-</span> <span class="fu">dir</span>(<span class="at">path =</span> CondPath, <span class="at">pattern =</span> <span class="st">".csv"</span>) <span class="co"># just the file names</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>file_names <span class="ot">&lt;-</span> <span class="fu">dir</span>(<span class="at">path =</span> TidePath, <span class="at">pattern =</span> <span class="st">".csv"</span>) <span class="co"># just the file names</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>save_temp_plot <span class="ot">&lt;-</span> <span class="cf">function</span>(file_name) {</span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  site_name <span class="ot">&lt;-</span> <span class="fu">str_remove</span>(file_name, <span class="st">"</span><span class="sc">\\</span><span class="st">.csv"</span>)</span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  p2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">paste0</span>(CondPath, <span class="st">"/"</span>, file_name)) <span class="sc">|&gt;</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date.Time, <span class="at">y =</span> Temp.C, <span class="at">color =</span> Intensity.lux)) <span class="sc">+</span> <span class="co"># same exact plot as before</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> site_name, <span class="at">x =</span> <span class="st">"Date"</span>, <span class="at">y =</span> <span class="st">"Temperature (°C)"</span>, <span class="at">color =</span> <span class="st">"Light Intensity"</span>)</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggsave</span>(<span class="fu">here</span>(<span class="st">"Week_13"</span>, <span class="st">"outputs"</span>, <span class="st">"map"</span>, <span class="fu">paste0</span>(site_name, <span class="st">"_temp.png"</span>)),</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">plot =</span> p2, <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">4</span>)</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="fu">walk</span>(file_names, save_temp_plot)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>   p2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">paste0</span>(TidePath, <span class="st">"/"</span>, file_name),</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">col_types =</span> <span class="fu">cols</span>(<span class="at">Intensity.lux =</span> <span class="fu">col_character</span>())) <span class="sc">|&gt;</span> </span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Date.Time     =</span> <span class="fu">mdy_hm</span>(Date.Time),             <span class="co"># for this method, need a different way of eliminating times</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">Intensity.lux =</span> <span class="fu">parse_number</span>(Intensity.lux)) <span class="sc">|&gt;</span> <span class="co"># "1,032" gets rid of the comma, only takes number</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date.Time, <span class="at">y =</span> Temp.C, <span class="at">color =</span> Intensity.lux)) <span class="sc">+</span> <span class="co"># ^ should do that for everything...</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co"># exact same plots as before</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_datetime</span>(<span class="at">date_breaks =</span> <span class="st">"1 day"</span>, <span class="at">date_labels =</span> <span class="st">"%b %d"</span>) <span class="sc">+</span>  <span class="co"># one label per day, no time</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> site_name, <span class="at">x =</span> <span class="st">"Date"</span>, <span class="at">y =</span> <span class="st">"Temperature (°C)"</span>, <span class="at">color =</span> <span class="st">"Light Intensity"</span>) <span class="sc">+</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a> <span class="fu">ggsave</span>(<span class="fu">here</span>(<span class="st">"Week_13"</span>, <span class="st">"outputs"</span>, <span class="st">"map"</span>, <span class="fu">paste0</span>(site_name, <span class="st">"_temp.png"</span>)),</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">plot =</span> p2, <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">4</span>)</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="fu">walk</span>(file_names, save_temp_plot) <span class="co"># these plots still came out looking very confusing</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion:</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>pool_table <span class="ot">&lt;-</span> oregon_data <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">filename =</span> <span class="fu">parse_number</span>(filename)) <span class="sc">|&gt;</span>   <span class="co"># Leaves only the number, "1-4"</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Tidepool"</span>, <span class="st">"Mean temp (°C)"</span>, <span class="st">"SD temp"</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Mean light (lux)"</span>, <span class="st">"SD light"</span>)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">|&gt;</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">kable_minimal</span>() <span class="sc">|&gt;</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">position =</span> <span class="st">"center"</span>)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>pool_table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-tp" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-tp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Mean and standard deviation of temperature and light in Oregon tide pools
+</figcaption>
+<div aria-describedby="tbl-tp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="lightable-minimal table cell caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">Tidepool</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Mean temp (°C)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">SD temp</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Mean light (lux)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">SD light</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">13.27092</td>
+<td style="text-align: right;">2.324037</td>
+<td style="text-align: right;">426.8262</td>
+<td style="text-align: right;">1660.553</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">13.17498</td>
+<td style="text-align: right;">2.308312</td>
+<td style="text-align: right;">5603.1554</td>
+<td style="text-align: right;">11928.919</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">13.10386</td>
+<td style="text-align: right;">2.317297</td>
+<td style="text-align: right;">5605.0705</td>
+<td style="text-align: right;">12101.099</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">13.22150</td>
+<td style="text-align: right;">2.269209</td>
+<td style="text-align: right;">655.1037</td>
+<td style="text-align: right;">2088.839</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Both methods of “for loops” and “map()” were useful and efficient ways to work with multiple datasets at once. I preferred map() for the initial gathering and calculating of data since it didnʻt require the step of “allocating space” before hand, however, when it came to the plots, I could not figure out how to mutate the x-axis Date.Time labels. Overall, they both allowed for a more efficient way to work with multiple datasets at once.</p>
 </section>
 
 </main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
